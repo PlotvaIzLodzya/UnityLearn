@@ -33,12 +33,10 @@ public class Objects : MonoBehaviour
 
     void OnMouseDown()
     {
-        
         isDragged = true;
         screenPoint = Camera.main.WorldToScreenPoint(gameObject.transform.position);
         gameObject.transform.position = new Vector3(0, transform.position.y, transform.position.z);
         offset = gameObject.transform.position - Camera.main.ScreenToWorldPoint(new Vector3(Input.mousePosition.x, Input.mousePosition.y, screenPoint.z));
-
         StartCoroutine("SettingStartPoint");
     }
 

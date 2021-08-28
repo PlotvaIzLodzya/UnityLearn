@@ -34,14 +34,13 @@ public class GameManager : MonoBehaviour
         }
     }
     private Vector3 RandomSpawnPosInArea()
-    { 
-        float minPosX = _spawnArea.transform.position.x - _spawnArea.GetComponent<BoxCollider>().size.x / 2;
-        float maxPosX = _spawnArea.transform.position.x + _spawnArea.GetComponent<BoxCollider>().size.x / 2;
-        float minPosZ = _spawnArea.transform.position.z - _spawnArea.GetComponent<BoxCollider>().size.z / 2;
-        float maxPosZ = _spawnArea.transform.position.z + _spawnArea.GetComponent<BoxCollider>().size.z / 2;
-        float posX = Random.Range(minPosX, maxPosX);
-        float posZ = Random.Range(minPosZ, maxPosZ);
+    {
+        Vector3 center = _spawnArea.transform.position;
+        float halfSizeX =  _spawnArea.GetComponent<BoxCollider>().size.x *_spawnArea.transform.localScale.x / 2;
+        float halfSizeZ = _spawnArea.GetComponent<BoxCollider>().size.z * _spawnArea.transform.localScale.z / 2;
+        float posX = Random.Range(-halfSizeX, halfSizeX);
+        float posZ = Random.Range(-halfSizeZ, halfSizeZ);
         Vector3 objectPos = new Vector3(posX, _spawnArea.transform.position.y, posZ);
-        return objectPos;
+        return objectPos + center;
     }
 }
