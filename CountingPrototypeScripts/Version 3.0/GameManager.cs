@@ -106,5 +106,10 @@ public class GameManager : MonoBehaviour
         isPreparationTimeActive(true);
         _time = 0;
     }
+
+    public void ApllicationClose()
+    {
+        Application.Quit();
+    }
 }
 
