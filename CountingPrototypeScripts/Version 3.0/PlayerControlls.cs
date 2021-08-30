@@ -2,23 +2,26 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-
-public class Timer : MonoBehaviour
+public class PlayerControlls : MonoBehaviour
 {
-    GameManager _gameManagerScript;
+    private GameManager _gameManagerScript;
     // Start is called before the first frame update
     void Start()
     {
         _gameManagerScript = FindObjectOfType<GameManager>().GetComponent<GameManager>();
-
     }
 
     // Update is called once per frame
     void Update()
     {
-        if(_gameManagerScript.isPreparationTime == false)
+        ButtonForRestart();
+    }
+
+    public void ButtonForRestart()
+    {
+        if (Input.GetKeyDown(KeyCode.R))
         {
-            _gameManagerScript._time += Time.deltaTime;
+            _gameManagerScript.RestartLevel();
         }
     }
 }

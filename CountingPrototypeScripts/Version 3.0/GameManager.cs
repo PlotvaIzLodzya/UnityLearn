@@ -1,16 +1,18 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class GameManager : MonoBehaviour
 {
     [SerializeField] private GameObject[] _objects;
     [SerializeField] private GameObject _spawnArea;
     [SerializeField] private int _gravityModifier;
-    public bool isPreparationTime = false;
+    private Interface _interfaceScript;
     public double _time;
     private double _currentLevelTimeComplition;
-    public double bestTime;
+    public double _bestTime;
+    public bool isPreparationTime;
     private int objectsAmount = 10;
     public float _forceMultiplier;
     public int _count;
@@ -18,20 +20,23 @@ public class GameManager : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        bestTime = 20.51f;
+        _bestTime = 999;
         ThrowingObjects();
         Physics.gravity *= _gravityModifier;
+        _interfaceScript = FindObjectOfType<Interface>().GetComponent<Interface>();
+        isPreparationTimeActive(true);
     }
 
     // Update is called once per frame
     void Update()
     {
         LevelComplition();
+        Debug.Log(isPreparationTime);
     }
 
     private void ThrowingObjects()
     {
-        for(int i = 0; i < objectsAmount; i++)
+        for (int i = 0; i < objectsAmount; i++)
         {
             int index = Random.Range(0, _objects.Length);
             Instantiate(_objects[index], RandomSpawnPosInArea(), _objects[index].transform.rotation);
@@ -52,49 +57,50 @@ public class GameManager : MonoBehaviour
     }
 
 
-    public void LevelComplition()
+    private void LevelComplition()
     {
-        if(_count == objectsAmount)
+        if (_count == objectsAmount)
         {
-            _currentLevelTimeComplition = _time;
             Debug.Log("Congratulations!");
-            BurningTrash();
             TimeWriter();
+            BurningTrash();
             ThrowingObjects();
-            StartCoroutine("LevelCreation");
+            isPreparationTimeActive(true);
         }
     }
 
-    public void LvlCreation()
-    {
-        ThrowingObjects();
-    }
-
-    public void BurningTrash()
+    private void BurningTrash()
     {
         GameObject[] trashOnLevel = GameObject.FindGameObjectsWithTag("Trash");
-        foreach(GameObject trash in trashOnLevel)
+        foreach (GameObject trash in trashOnLevel)
         {
             Destroy(trash.gameObject);
         }
     }
 
-    public void TimeWriter()
+    private void TimeWriter()
     {
-        if (bestTime > _currentLevelTimeComplition)
+        _currentLevelTimeComplition = _time;
+        if (_bestTime > _currentLevelTimeComplition)
         {
-            bestTime = _currentLevelTimeComplition;
+            _bestTime = _currentLevelTimeComplition;
+            _interfaceScript.BestTimeSetting(_bestTime);
         }
+
     }
 
-    IEnumerator LevelCreation()
+    public void isPreparationTimeActive(bool isActive)
     {
-        isPreparationTime = true;
-        yield return new WaitForSeconds(3);
-        _time = 0;
-        isPreparationTime = false;
+        isPreparationTime = isActive;
+        _interfaceScript.PreparationOnScreen(isActive);
 
-        
     }
-
+    public void RestartLevel()
+    {
+        BurningTrash();
+        ThrowingObjects();
+        isPreparationTimeActive(true);
+        _time = 0;
+    }
 }
+
