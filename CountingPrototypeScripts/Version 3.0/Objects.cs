@@ -23,11 +23,14 @@ public class Objects : MonoBehaviour
         ConstrainObject();
     }
 
+    public void OnMouseDown()
+    {
+        isDragged = true;
+    }
     void OnMouseDrag()
     {
-        if (gameManagerScript.isPreparationTime == false)
+        if (gameManagerScript.isPreparationTime == false && isDragged == true)
         {   
-            isDragged = true;
             screenPoint = Camera.main.WorldToScreenPoint(gameObject.transform.position);
             gameObject.transform.position = new Vector3(0, transform.position.y, transform.position.z);
             Vector3 forceDirection = Camera.main.ScreenToWorldPoint(new Vector3(Input.mousePosition.x, Input.mousePosition.y, screenPoint.z)) - transform.position;
@@ -49,13 +52,9 @@ public class Objects : MonoBehaviour
         }
     }
 
-    private void OnCollisionEnter(Collision collision)
+    private void OnTriggerEnter(Collider other)
     {
-        if (collision.gameObject.CompareTag("Ground") && isDragged)
-        {
-            isDragged = false; 
-        }
+        isDragged = false;
     }
-
 
 }

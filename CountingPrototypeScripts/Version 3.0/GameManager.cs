@@ -8,12 +8,13 @@ public class GameManager : MonoBehaviour
     [SerializeField] private GameObject[] _objects;
     [SerializeField] private GameObject _spawnArea;
     [SerializeField] private int _gravityModifier;
+    [SerializeField] private Sound _soundManager;
     private Interface _interfaceScript;
     public double _time;
     private double _currentLevelTimeComplition;
     public double _bestTime;
     public bool isPreparationTime;
-    private int objectsAmount = 10;
+    public int objectsAmount = 10;
     public float _forceMultiplier;
     public int _count;
 
@@ -23,6 +24,7 @@ public class GameManager : MonoBehaviour
         _bestTime = 999;
         ThrowingObjects();
         Physics.gravity *= _gravityModifier;
+        _soundManager = FindObjectOfType<Sound>().GetComponent<Sound>();
         _interfaceScript = FindObjectOfType<Interface>().GetComponent<Interface>();
         isPreparationTimeActive(true);
     }
@@ -39,11 +41,11 @@ public class GameManager : MonoBehaviour
         for (int i = 0; i < objectsAmount; i++)
         {
             int index = Random.Range(0, _objects.Length);
-            Instantiate(_objects[index], RandomSpawnPosInArea(), _objects[index].transform.rotation);
+            Instantiate(_objects[index], RandomSpawnPosInArea(_spawnArea), _objects[index].transform.rotation);
         }
     }
 
-    private Vector3 RandomSpawnPosInArea()
+    public Vector3 RandomSpawnPosInArea(GameObject _spawnArea)
     {
         Vector3 center = _spawnArea.transform.position;
         float halfSizeX = _spawnArea.GetComponent<BoxCollider>().size.x * _spawnArea.transform.localScale.x / 2;
@@ -61,6 +63,7 @@ public class GameManager : MonoBehaviour
     {
         if (_count == objectsAmount)
         {
+
             Debug.Log("Congratulations!");
             TimeWriter();
             BurningTrash();
@@ -74,6 +77,7 @@ public class GameManager : MonoBehaviour
         GameObject[] trashOnLevel = GameObject.FindGameObjectsWithTag("Trash");
         foreach (GameObject trash in trashOnLevel)
         {
+            _soundManager.playSound(_soundManager.burningTrash,_soundManager.burningTrashSoundLevel);
             Destroy(trash.gameObject);
         }
     }

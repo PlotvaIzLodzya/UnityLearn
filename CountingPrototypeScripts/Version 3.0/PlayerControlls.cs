@@ -24,4 +24,6 @@ public class PlayerControlls : MonoBehaviour
             _gameManagerScript.RestartLevel();
         }
     }
+
+
 }

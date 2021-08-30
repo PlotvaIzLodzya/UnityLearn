@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 using TMPro;
+using UnityEngine.UI;
 using System;
 
 public class Interface : MonoBehaviour
@@ -10,7 +11,9 @@ public class Interface : MonoBehaviour
     [SerializeField] private TextMeshProUGUI _timerText;
     [SerializeField] private TextMeshProUGUI _bestTime;
     [SerializeField] private GameObject prepScreen;
+    [SerializeField] private Slider volumeSlider;
     private GameManager _gameManagerScript;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -20,10 +23,8 @@ public class Interface : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        
         _timerText.text = "Time: " + Math.Round(_gameManagerScript._time,2);
-        _counterText.text = "Count: " + _gameManagerScript._count;
-
+        _counterText.text = "Count: " + _gameManagerScript._count + "/" +_gameManagerScript.objectsAmount;
     }
 
     public void BestTimeSetting(double bestTime)
