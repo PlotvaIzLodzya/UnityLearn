@@ -46,10 +46,9 @@ public class Objects : MonoBehaviour
     private void ConstrainObject()
     {
         objectRigidbody.useGravity = !isDragged;
+
         if (isDragged)
-        {
             objectRigidbody.velocity = Vector3.zero;
-        }
     }
 
     private void OnTriggerEnter(Collider other)

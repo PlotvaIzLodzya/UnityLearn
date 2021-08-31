@@ -5,7 +5,7 @@ using UnityEngine.SceneManagement;
 
 public class GameManager : MonoBehaviour
 {
-    [SerializeField] private GameObject[] _objects;
+    [SerializeField] private GameObject[] _garbage;
     [SerializeField] private GameObject _spawnArea;
     [SerializeField] private int _gravityModifier;
     [SerializeField] private Sound _soundManager;
@@ -22,28 +22,33 @@ public class GameManager : MonoBehaviour
     void Start()
     {
         _bestTime = 999;
-        ThrowingObjects();
         Physics.gravity *= _gravityModifier;
         _soundManager = FindObjectOfType<Sound>().GetComponent<Sound>();
         _interfaceScript = FindObjectOfType<Interface>().GetComponent<Interface>();
         isPreparationTimeActive(true);
+        StartNewLevel();
     }
 
     // Update is called once per frame
     void Update()
     {
         LevelComplition();
-        Debug.Log(isPreparationTime);
+        Debug.Log(_bestTime);
     }
 
-    private void ThrowingObjects()
+    public void LitterTheStreet(int amount)
     {
-        for (int i = 0; i < objectsAmount; i++)
-        {
-            int index = Random.Range(0, _objects.Length);
-            Instantiate(_objects[index], RandomSpawnPosInArea(_spawnArea), _objects[index].transform.rotation);
-        }
+        for(int i = 0; i< amount; i++)
+            ObjectSpawn(_garbage, _spawnArea, 0);
     }
+    public void ObjectSpawn(GameObject[] _objectToSpawn, GameObject _spawnArea, float angle)
+    {
+        int prefabIndex = Random.Range(0, _objectToSpawn.Length);
+        Instantiate(_objectToSpawn[prefabIndex],
+                    RandomSpawnPosInArea(_spawnArea),
+                    Quaternion.Euler(0, angle, 0));
+    }
+
 
     public Vector3 RandomSpawnPosInArea(GameObject _spawnArea)
     {
@@ -63,12 +68,10 @@ public class GameManager : MonoBehaviour
     {
         if (_count == objectsAmount)
         {
-
             Debug.Log("Congratulations!");
             TimeWriter();
             BurningTrash();
-            ThrowingObjects();
-            isPreparationTimeActive(true);
+            StartNewLevel();
         }
     }
 
@@ -76,10 +79,8 @@ public class GameManager : MonoBehaviour
     {
         GameObject[] trashOnLevel = GameObject.FindGameObjectsWithTag("Trash");
         foreach (GameObject trash in trashOnLevel)
-        {
-            _soundManager.playSound(_soundManager.burningTrash,_soundManager.burningTrashSoundLevel);
             Destroy(trash.gameObject);
-        }
+        _soundManager.playSound(_soundManager.burningTrash, _soundManager.burningTrashSoundLevel);
     }
 
     private void TimeWriter()
@@ -99,12 +100,10 @@ public class GameManager : MonoBehaviour
         _interfaceScript.PreparationOnScreen(isActive);
 
     }
-    public void RestartLevel()
+    public void StartNewLevel()
     {
-        BurningTrash();
-        ThrowingObjects();
         isPreparationTimeActive(true);
-        _time = 0;
+        LitterTheStreet(objectsAmount);
     }
 
     public void ApllicationClose()

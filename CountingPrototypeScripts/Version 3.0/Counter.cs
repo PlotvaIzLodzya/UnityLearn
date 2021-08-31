@@ -35,7 +35,7 @@ public class Counter : MonoBehaviour
     }
     private void OnTriggerEnter(Collider other)
     {
-        _soundManager.playSound(_soundManager._counted,Math.Min( _trashcan.Length, _soundManager.maxCountedSoundLevel));
+        _soundManager.playSound(_soundManager._counted,Math.Min(_trashcan.Length, _soundManager.maxCountedSoundLevel));
     }
    
 }

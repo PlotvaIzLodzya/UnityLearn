@@ -21,7 +21,7 @@ public class PlayerControlls : MonoBehaviour
     {
         if (Input.GetKeyDown(KeyCode.R))
         {
-            _gameManagerScript.RestartLevel();
+            _gameManagerScript.StartNewLevel();
         }
     }
 

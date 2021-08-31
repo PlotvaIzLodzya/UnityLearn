@@ -13,8 +13,8 @@ public class LetMeInButton : MonoBehaviour
     {
         _gameManagerScript = FindObjectOfType<GameManager>().GetComponent<GameManager>();
         _button = GetComponent<Button>();
+        _soundManager = FindObjectOfType<Sound>().GetComponent<Sound>();
         _button.onClick.AddListener(DisablePrepartionTime);
-        _button.onClick.AddListener(SoundEffect);
     }
 
     // Update is called once per frame
@@ -27,11 +27,8 @@ public class LetMeInButton : MonoBehaviour
     {
         _gameManagerScript.isPreparationTimeActive(false);
         _gameManagerScript._time = 0;
-    }
-
-    private void SoundEffect()
-    {
         _soundManager.playSound(_soundManager._click, _soundManager.clickSoundLevel);
     }
+
 
 }
