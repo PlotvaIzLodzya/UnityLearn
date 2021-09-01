@@ -7,7 +7,7 @@ public class GameManager : MonoBehaviour
 {
     [SerializeField] private GameObject[] _garbage;
     [SerializeField] private GameObject _spawnArea;
-    [SerializeField] private int _gravityModifier;
+    [SerializeField] private int _gravityModifier = 8;
     [SerializeField] private Sound _soundManager;
     private Interface _interfaceScript;
     public double _time;
@@ -16,14 +16,15 @@ public class GameManager : MonoBehaviour
     public bool isPreparationTime;
     public int objectsAmount = 10;
     public float _forceMultiplier =2000;
-    public float _masSpeed;
+    public float _maxSpeed;
     public int _count;
 
     // Start is called before the first frame update
     void Start()
     {
-        _bestTime = 999;
         Physics.gravity *= _gravityModifier;
+        _bestTime = 999;
+
         _soundManager = FindObjectOfType<Sound>().GetComponent<Sound>();
         _interfaceScript = FindObjectOfType<Interface>().GetComponent<Interface>();
         StartNewLevel();
@@ -44,12 +45,12 @@ public class GameManager : MonoBehaviour
     {
         int prefabIndex = Random.Range(0, _objectToSpawn.Length);
         Instantiate(_objectToSpawn[prefabIndex],
-                    RandomSpawnPosInArea(_spawnArea),
+                    RandomSpawnPosInBoxCollider(_spawnArea),
                     Quaternion.Euler(0, yAngle, 0));
     }
 
 
-    public Vector3 RandomSpawnPosInArea(GameObject _spawnArea)
+    public Vector3 RandomSpawnPosInBoxCollider(GameObject _spawnArea)
     {
         Vector3 center = _spawnArea.transform.position;
         float halfSizeX = _spawnArea.GetComponent<BoxCollider>().size.x * _spawnArea.transform.localScale.x / 2;
@@ -79,6 +80,7 @@ public class GameManager : MonoBehaviour
         GameObject[] trashOnLevel = GameObject.FindGameObjectsWithTag("Trash");
         foreach (GameObject trash in trashOnLevel)
             Destroy(trash.gameObject);
+
         _soundManager.playSound(_soundManager.burningTrash, _soundManager.burningTrashSoundLevel);
     }
 

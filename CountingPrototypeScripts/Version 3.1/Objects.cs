@@ -16,7 +16,7 @@ public class Objects : MonoBehaviour
     void Start()
     {
         _objectRigidbody = GetComponent<Rigidbody>();
-        _gameManagerScript = GameObject.Find("GameManager").GetComponent<GameManager>();
+        _gameManagerScript = FindObjectOfType<GameManager>().GetComponent<GameManager>();
     }
 
     // Update is called once per frame
@@ -36,6 +36,7 @@ public class Objects : MonoBehaviour
             _screenPoint = Camera.main.WorldToScreenPoint(gameObject.transform.position);
             gameObject.transform.position = new Vector3(0, transform.position.y, transform.position.z);
             Vector3 forceDirection = Camera.main.ScreenToWorldPoint(new Vector3(Input.mousePosition.x, Input.mousePosition.y, _screenPoint.z)) - transform.position;
+
             _objectRigidbody.AddForce(forceDirection * _gameManagerScript._forceMultiplier, ForceMode.Force);
         }
     }
@@ -54,10 +55,9 @@ public class Objects : MonoBehaviour
         //if (_objectRigidbody.velocity.magnitude > _maxSpeed)
         //    _objectRigidbody.AddForce(-_objectRigidbody.velocity * (_objectRigidbody.velocity.magnitude - _maxSpeed), ForceMode.Acceleration);
 
-        if (_objectRigidbody.velocity.magnitude > _gameManagerScript._masSpeed)
+        if (_objectRigidbody.velocity.magnitude > _gameManagerScript._maxSpeed)
         {
-            _objectRigidbody.velocity = _objectRigidbody.velocity.normalized * _gameManagerScript._masSpeed;
-            Debug.Log("Working. speed = " + _objectRigidbody.velocity.magnitude);
+            _objectRigidbody.velocity = _objectRigidbody.velocity.normalized * _gameManagerScript._maxSpeed;
         }
 
     }

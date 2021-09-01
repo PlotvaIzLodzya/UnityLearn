@@ -17,7 +17,7 @@ public class Interface : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        _gameManagerScript = GameObject.Find("GameManager").GetComponent<GameManager>();
+        _gameManagerScript = FindObjectOfType<GameManager>().GetComponent<GameManager>();
     }
 
     // Update is called once per frame

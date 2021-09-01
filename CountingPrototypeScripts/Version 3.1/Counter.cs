@@ -16,7 +16,7 @@ public class Counter : MonoBehaviour
 
     private void Start()
     {
-        _gameManagerScript = GameObject.Find("GameManager").GetComponent<GameManager>();
+        _gameManagerScript = FindObjectOfType<GameManager>().GetComponent<GameManager>();
         _soundManager = FindObjectOfType<Sound>();
 
         _trashcanTrigger = GetComponent<BoxCollider>();

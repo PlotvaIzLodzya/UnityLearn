@@ -2,32 +2,50 @@
 using System.Collections.Generic;
 using UnityEngine;
 
+public enum SpawnAreaCatalog
+{
+    NoArea,
+    CarSpawnArea,
+    RightSpawnArea,
+    LeftSpawnArea,
+    
+}
 public class BackgroundSpawns : MonoBehaviour
 {
     private GameManager _gameManagerScript;
     [SerializeField] GameObject[] _spawnAreas;
     [SerializeField] GameObject[] _cititzenPrefabs;
     [SerializeField] GameObject[] _carPrefabs;
-    private int carSpawnAreaID = 0;
-    private int CitizenSpawnAreaRightID = 1;
-    private int CitizenSpawnAreaLeftID = 2;
-    private float minSpawnTime = 5;
-    private float maxSpawnTime = 15;
+   
+    private float minSpawnTime = 1;
+    private float maxSpawnTime = 5;
 
     // Start is called before the first frame update
     void Start()
     {
         _gameManagerScript = FindObjectOfType<GameManager>().GetComponent<GameManager>();
-
-        StartCoroutine(BackSceneRuler(_carPrefabs, _spawnAreas[carSpawnAreaID], 180.0f));
-        StartCoroutine(BackSceneRuler(_cititzenPrefabs, _spawnAreas[CitizenSpawnAreaRightID], 180.0f));
-        StartCoroutine(BackSceneRuler(_cititzenPrefabs, _spawnAreas[CitizenSpawnAreaLeftID], 0));
+        StartCoroutine(BackSceneRuler(_carPrefabs, GetArea(SpawnAreaCatalog.CarSpawnArea), 180.0f));
+        StartCoroutine(BackSceneRuler(_cititzenPrefabs, GetArea(SpawnAreaCatalog.RightSpawnArea), 180.0f));
+        StartCoroutine(BackSceneRuler(_cititzenPrefabs, GetArea(SpawnAreaCatalog.LeftSpawnArea), 0));
     }
 
     // Update is called once per frame
     void Update()
     {
             
+    }
+
+    public GameObject GetArea(SpawnAreaCatalog spawnAreaId)
+    { 
+        int index = 0;
+        {
+            for (int i = 0; i < _spawnAreas.Length; i++)
+            {
+                if (spawnAreaId == _spawnAreas[i].GetComponent<AreaId>()._areaName)
+                    index = i;
+            }
+        }
+        return _spawnAreas[index];
     }
 
 
