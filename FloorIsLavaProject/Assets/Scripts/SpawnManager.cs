@@ -13,7 +13,7 @@ public class SpawnManager : MonoBehaviour
     public GameObject exitKey;
     private GameManager gameManager;
 
-    public float powerUpPosY = 3.0f;
+    private float powerUpPosY = 3.5f;
     public float platformPosY = 1.25f;
     private float movingWallsOffset = 2.0f;
     private float spawnRate = 3.0f;
@@ -29,11 +29,6 @@ public class SpawnManager : MonoBehaviour
     private int widthPlatformAmount;
     private int movingWallsAmount;
 
-
-
-
-
-
     // Start is called before the first frame update
     void Start()
     {
@@ -45,7 +40,6 @@ public class SpawnManager : MonoBehaviour
     }
     public void LevelCreation()
     {
-        MovingWallsCreation();
         ExitKeyPlacing();
         PlatformPlacing();
         LavaPlacing();

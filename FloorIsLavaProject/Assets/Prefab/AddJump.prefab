@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 8514012440105710454}
   - component: {fileID: 8514012440105710451}
   - component: {fileID: 8514012440105710450}
-  - component: {fileID: 8514012440105710449}
+  - component: {fileID: 6416865948789842010}
   m_Layer: 0
   m_Name: AddJump
   m_TagString: PowerUp
@@ -26,14 +26,14 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 8514012440105710455}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalRotation: {x: 0.08880739, y: 0, z: 0, w: 0.9960488}
   m_LocalPosition: {x: -1, y: 3, z: -1}
   m_LocalScale: {x: 0.5, y: 0.5, z: 0.5}
   m_Children:
   - {fileID: 3580486444424606696}
   m_Father: {fileID: 0}
   m_RootOrder: 0
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_LocalEulerAnglesHint: {x: 10.19, y: 0, z: 0}
 --- !u!33 &8514012440105710451
 MeshFilter:
   m_ObjectHideFlags: 0
@@ -56,7 +56,7 @@ CapsuleCollider:
   m_Height: 2
   m_Direction: 1
   m_Center: {x: 0, y: 0, z: 0}
---- !u!114 &8514012440105710449
+--- !u!114 &6416865948789842010
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -65,15 +65,9 @@ MonoBehaviour:
   m_GameObject: {fileID: 8514012440105710455}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 331cdb1eee291bb42bcb65b5489d8ec8, type: 3}
+  m_Script: {fileID: 11500000, guid: 01982ddd50dba8d45bb5c7c6dca0c209, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  topBorder: 3.2
-  bottomBorder: 3
-  speed: 0.1
-  maxSpeed: 2
-  minSpeed: 0
-  currentPositionY: 3
 --- !u!1001 &3584519267315787246
 PrefabInstance:
   m_ObjectHideFlags: 0

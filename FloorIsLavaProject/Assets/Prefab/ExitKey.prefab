@@ -11,7 +11,6 @@ GameObject:
   - component: {fileID: 2950102865110463171}
   - component: {fileID: 2950102865110463170}
   - component: {fileID: 2950102865110463183}
-  - component: {fileID: 2950102865110463182}
   - component: {fileID: 2950102865110463172}
   m_Layer: 0
   m_Name: ExitKey
@@ -56,24 +55,6 @@ BoxCollider:
   serializedVersion: 2
   m_Size: {x: 1.0000001, y: 2, z: 1.0000002}
   m_Center: {x: 0.000000059604645, y: 0, z: -0.00000008940697}
---- !u!114 &2950102865110463182
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2950102865110463181}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 331cdb1eee291bb42bcb65b5489d8ec8, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  topBorder: 3.4
-  bottomBorder: 3.2
-  speed: 0.1
-  maxSpeed: 2
-  minSpeed: 0.5
-  currentPositionY: 0
 --- !u!114 &2950102865110463172
 MonoBehaviour:
   m_ObjectHideFlags: 0

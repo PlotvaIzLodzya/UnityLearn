@@ -22,14 +22,14 @@ public class GameManager : MonoBehaviour
     public int lengthPlatformAmount = 20;
     public int widthPlatformAmount = 4;
 
-    public float _maxDuration = 6.0f;
-    public float _minDuration = 3f;
+    [SerializeField] private int _maxDuration = 10;
+    [SerializeField] private int _minDuration = 1;
 
 
     // Start is called before the first frame update
     void Start()
     {
-        spawnManager = GameObject.Find("SpawnManager").GetComponent<SpawnManager>();
+        spawnManager = FindObjectOfType<SpawnManager>().GetComponent<SpawnManager>();
         player = GameObject.Find("Player");
         spawnManager.LevelCreation();
     }
@@ -74,9 +74,9 @@ public class GameManager : MonoBehaviour
         Destroy(powerUp);
     }
 
-    public float DurationGeneration(float min, float max)
+    public int DurationGeneration()
     {
-        return Random.Range(min, max);
+        return Random.Range(_minDuration, _maxDuration);
     }
 
     public bool IsPlatformStatic()

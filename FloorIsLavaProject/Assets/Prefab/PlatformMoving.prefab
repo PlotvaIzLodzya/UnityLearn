@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 4590069513642789043}
   - component: {fileID: 4590069513642789004}
   - component: {fileID: 4590069513642789042}
-  - component: {fileID: 4590069513642789007}
+  - component: {fileID: 6465300315304998485}
   m_Layer: 0
   m_Name: PlatformMoving
   m_TagString: Ground
@@ -55,7 +55,7 @@ BoxCollider:
   serializedVersion: 2
   m_Size: {x: 1, y: 1.1597325, z: 1}
   m_Center: {x: 0, y: 0.07986622, z: 0}
---- !u!114 &4590069513642789007
+--- !u!114 &6465300315304998485
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -64,15 +64,35 @@ MonoBehaviour:
   m_GameObject: {fileID: 4590069513642789040}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 331cdb1eee291bb42bcb65b5489d8ec8, type: 3}
+  m_Script: {fileID: 11500000, guid: addb28147275174469f11d347319c93a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  topBorder: 0.75
-  bottomBorder: -1.8
-  speed: 1
-  maxSpeed: 1
-  minSpeed: 0
-  currentPositionY: 0
+  _yTravel:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 1
+      inSlope: -3.6824024
+      outSlope: -3.6824024
+      tangentMode: 34
+      weightedMode: 0
+      inWeight: 0
+      outWeight: 0.33333334
+    - serializedVersion: 3
+      time: 1.0021315
+      value: -2.6902514
+      inSlope: -3.6824024
+      outSlope: -3.6824024
+      tangentMode: 34
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  _duration: 1
+  _hight: 1.25
 --- !u!1001 &2711438640755363103
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -139,6 +159,11 @@ PrefabInstance:
     - target: {fileID: 4831946855376156, guid: c18b0566c0ca32548acca53d337698db, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 23469738138824474, guid: c18b0566c0ca32548acca53d337698db,
+        type: 3}
+      propertyPath: m_DynamicOccludee
+      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: c18b0566c0ca32548acca53d337698db, type: 3}

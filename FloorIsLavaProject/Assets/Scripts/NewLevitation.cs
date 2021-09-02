@@ -5,7 +5,7 @@ using UnityEngine;
 public class NewLevitation : MonoBehaviour
 {
     [SerializeField] private AnimationCurve _yTravel;
-    [SerializeField] private float _duration = 1;
+    public float _duration;
     [SerializeField] private float _hight = 0.75f;
 
     private bool isStatic = false;
@@ -16,23 +16,22 @@ public class NewLevitation : MonoBehaviour
     void Start()
     {
         _gameManagerScript = FindObjectOfType<GameManager>().GetComponent<GameManager>();
+        SettingDuration(_gameManagerScript.DurationGeneration());
+        isStatic = _gameManagerScript.IsPlatformStatic();
         _yTravel.preWrapMode = WrapMode.PingPong;
         _yTravel.postWrapMode = WrapMode.PingPong;
     }
 
     // Update is called once per frame
-    void Update()
+    void LateUpdate()
     {
-        ObjectMoving();
+        if(!isStatic)
+        transform.position = new Vector3(transform.position.x, _yTravel.Evaluate(Time.time / _duration) * _hight, transform.position.z);
     }
 
-    private float SettingDuration()
+    private void SettingDuration(int duration)
     {
-        return _duration *= _gameManagerScript.DurationGeneration(_gameManagerScript._minDuration, _gameManagerScript._maxDuration);
+        _duration = duration;
     }
 
-    public void ObjectMoving()
-    {
-        transform.position = new Vector3(transform.position.x, _yTravel.Evaluate(Time.time / SettingDuration()) * _hight, transform.position.z);
-    }
 }
