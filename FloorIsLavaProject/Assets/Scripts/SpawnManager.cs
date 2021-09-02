@@ -6,60 +6,63 @@ public class SpawnManager : MonoBehaviour
 {
     public GameObject powerUp;
     public GameObject platform;
-    public GameObject movingWall;
+    public GameObject[] _throwers;
     public GameObject lavaFloor;
-    public GameObject lvlBorderHorizontal;
-    public GameObject lvlBorderVertical;
     public GameObject exitKey;
-    private GameManager gameManager;
+    private GameManager _gameManager;
+
+    public GameObject[] _decorations;
 
     private float powerUpPosY = 3.5f;
     public float platformPosY = 1.25f;
     private float movingWallsOffset = 2.0f;
-    private float spawnRate = 3.0f;
     private int xStartPos = 0;
     private int zStartPos = 0;
 
     private float lavaFloorDistance;
     private float lavaCoveringMultiplier = 8;
     private int distance = 4;
+    private int _lastIdnex;
 
     public int platformCounter;
-    private int lengthPlatformAmount;
-    private int widthPlatformAmount;
     private int movingWallsAmount;
 
     // Start is called before the first frame update
     void Start()
     {
+
         lavaFloorDistance = lavaFloor.gameObject.GetComponent<BoxCollider>().size.x * lavaFloor.transform.localScale.x;
-        gameManager = GameObject.Find("GameManager").GetComponent<GameManager>();
-        lengthPlatformAmount = gameManager.lengthPlatformAmount;
-        widthPlatformAmount = gameManager.widthPlatformAmount;
-        movingWallsAmount = lengthPlatformAmount / 5;
+        _gameManager = FindObjectOfType<GameManager>().GetComponent<GameManager>();
+        movingWallsAmount = _gameManager.lengthPlatformAmount / 5;
     }
     public void LevelCreation()
     {
-        ExitKeyPlacing();
+        for (int i = 0; i < _gameManager.maxExitKeyAmount; i++)
+            ObjectRandomSpawn(exitKey, _gameManager.lengthPlatformAmount / 2, zStartPos);
+
+        ObjectRandomSpawn(powerUp, _gameManager.lengthPlatformAmount / 4, zStartPos);
+        LvlObjectPlacing();
         PlatformPlacing();
-        LavaPlacing();
-        PowerUpPlacing();
-        StartCoroutine("SpawnWalls");
+        StartCoroutine(SpawnThrower((int)ThrowerCatalog.OneWayThrower));
+
+        if(_gameManager.levelCounter > 5)
+            StartCoroutine(SpawnThrower((int)ThrowerCatalog.TwoWayThrower));
     }
 
     private Vector3 GenerateRandomPos(int xStartPos, int zStartPos)
     {
-        int posX = Random.Range(xStartPos, lengthPlatformAmount) * distance;
-        int posZ = Random.Range(zStartPos, widthPlatformAmount) * distance;
+        int posX = Random.Range(xStartPos, _gameManager.lengthPlatformAmount) * distance;
+        int posZ = Random.Range(zStartPos, _gameManager.widthPlatformAmount) * distance;
         Vector3 position = new Vector3(posX, powerUpPosY, posZ);
         return position;
     }
+    
 
     private void PlatformPlacing()
     {
-        for(int x = xStartPos; x < lengthPlatformAmount; x++)
+        for(int x = xStartPos; x < _gameManager.lengthPlatformAmount; x++)
         {
-            for(int z = zStartPos; z< widthPlatformAmount; z++)
+            for(int z = zStartPos; z< _gameManager.widthPlatformAmount; z++)
             {
                 int posX = x * distance;
                 int posZ = z * distance;
@@ -69,48 +72,55 @@ public class SpawnManager : MonoBehaviour
         }
     }
 
-    private void MovingWallsCreation()
+    private void LvlObjectPlacing()
+    {
+        for (int i = 1; i <= _gameManager.lengthPlatformAmount / lavaCoveringMultiplier; i++)
+        {
+            float posX = i * lavaFloorDistance;
+            PlaceDecoration(posX, -20);
+            PlaceDecoration(posX, 30);
+            Instantiate(lavaFloor, new Vector3(posX, 0, 5), lavaFloor.transform.rotation);
+            
+        }
+    }
+
+    private void PlaceDecoration(float posX, float posZ)
+    {
+        int curIndex = Random.Range(0, _decorations.Length);
+        if (curIndex != _lastIdnex)
+        {
+            Instantiate(_decorations[curIndex], new Vector3(posX, 0, posZ), _decorations[curIndex].transform.rotation);
+            _lastIdnex = curIndex;
+        }
+        else
+            PlaceDecoration(posX, posZ);
+    }
+
+
+    private void FlameThrowerCreation(int throwerIndex)
     {
         for(int i = 0; i < movingWallsAmount; i++)
         {
             
-            float posX = Random.Range(2, lengthPlatformAmount) * distance - movingWallsOffset;
-            float posZ = Random.Range(-10, -20);
-            Vector3 wallPos = new Vector3(posX, movingWall.transform.position.y, posZ);
-            Instantiate(movingWall, wallPos, movingWall.transform.rotation);
+            float posX = Random.Range(2, _gameManager.lengthPlatformAmount) * distance - movingWallsOffset;
+            float posZ = -15.0f;
+            Vector3 wallPos = new Vector3(posX, _throwers[throwerIndex].transform.position.y, posZ);
+            Instantiate(_throwers[throwerIndex], wallPos, _throwers[throwerIndex].transform.rotation);
         }
     }
 
-    private void LavaPlacing()
+    public void ObjectRandomSpawn(GameObject objectToSpawn, int xStartPos, int zStartPos)
     {
-        for(int i = 1; i <= lengthPlatformAmount/ lavaCoveringMultiplier; i++)
-        {
-            float posX = i * lavaFloorDistance;
-            Vector3 lavaPos = new Vector3(posX, 0, 5);
-            Instantiate(lavaFloor, lavaPos, lavaFloor.transform.rotation);
-        }
+        Instantiate(objectToSpawn, GenerateRandomPos(xStartPos, zStartPos), objectToSpawn.transform.rotation);
     }
 
-    private void PowerUpPlacing()
-    {
-        Instantiate(powerUp, GenerateRandomPos(lengthPlatformAmount/4, zStartPos), powerUp.transform.rotation);
-    }
-
-    public void ExitKeyPlacing()
-    {
-        for(int i = 0; i <= gameManager.maxExitKeyAmount; i++)
-        {
-            Instantiate(exitKey, GenerateRandomPos(lengthPlatformAmount / 2, zStartPos), exitKey.transform.rotation);
-        }
-    }
-
-    IEnumerator SpawnWalls()
+    IEnumerator SpawnThrower(int throwerIndex)
     {
         while (true)
         {
+            int spawnRate = Random.Range(5, 10);
             yield return new WaitForSeconds(spawnRate);
-            MovingWallsCreation();
-
+            FlameThrowerCreation(throwerIndex);
         }
     }
 }

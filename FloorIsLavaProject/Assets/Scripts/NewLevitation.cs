@@ -18,6 +18,7 @@ public class NewLevitation : MonoBehaviour
         _gameManagerScript = FindObjectOfType<GameManager>().GetComponent<GameManager>();
         SettingDuration(_gameManagerScript.DurationGeneration());
         isStatic = _gameManagerScript.IsPlatformStatic();
+
         _yTravel.preWrapMode = WrapMode.PingPong;
         _yTravel.postWrapMode = WrapMode.PingPong;
     }

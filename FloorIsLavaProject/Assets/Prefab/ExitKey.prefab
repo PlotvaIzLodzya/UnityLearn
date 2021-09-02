@@ -12,6 +12,7 @@ GameObject:
   - component: {fileID: 2950102865110463170}
   - component: {fileID: 2950102865110463183}
   - component: {fileID: 2950102865110463172}
+  - component: {fileID: 6540351875475425776}
   m_Layer: 0
   m_Name: ExitKey
   m_TagString: ExitKey
@@ -53,8 +54,8 @@ BoxCollider:
   m_IsTrigger: 1
   m_Enabled: 1
   serializedVersion: 2
-  m_Size: {x: 1.0000001, y: 2, z: 1.0000002}
-  m_Center: {x: 0.000000059604645, y: 0, z: -0.00000008940697}
+  m_Size: {x: 1.8833544, y: 2, z: 1.0000002}
+  m_Center: {x: 0.02412963, y: -4.7363147e-10, z: -0.0000000010044866}
 --- !u!114 &2950102865110463172
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -65,6 +66,18 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 01982ddd50dba8d45bb5c7c6dca0c209, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &6540351875475425776
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2950102865110463181}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7378fcd5a690ea246ad5352accaa587a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
 --- !u!1001 &2129041657

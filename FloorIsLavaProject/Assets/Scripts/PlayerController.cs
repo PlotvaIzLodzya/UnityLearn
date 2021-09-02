@@ -14,8 +14,6 @@ public class PlayerController : MonoBehaviour
     private int jumpCounter = 0;
     public int maxJumpAmount = 1;
     public float jumpCooldown =2f;
-    private float timeStamps;
-    private GameManager gameManager;
     private int gravityModifier = 4;
 
 
@@ -24,10 +22,7 @@ public class PlayerController : MonoBehaviour
     void Start()
     {
         playerRb = GetComponent<Rigidbody>();
-        gameManager = GameObject.Find("GameManager").GetComponent<GameManager>();
         Physics.gravity *= gravityModifier;
-
-
     }
 
     // Update is called once per frame
@@ -44,34 +39,18 @@ public class PlayerController : MonoBehaviour
             isGrounded = true;
             jumpCounter = 0;
         }
-        if (collision.gameObject.CompareTag("Roof"))
-        {
-            ConstrainPlayerPosition();
-        }
-        if(collision.gameObject.CompareTag("Lava"))
-        {
-            gameManager.PlayerReborn();
-
-        }
-
     }
 
     private void OnTriggerEnter(Collider other)
     {
         if(other.gameObject.CompareTag("PowerUp"))
         {
-
             if (other.gameObject.name == "AddJump(Clone)")
             {
                 maxJumpAmount++;
             }
             Destroy(other.gameObject);
         }
-        if(other.gameObject.CompareTag("ExitKey"))
-        {
-            Destroy(other.gameObject);
-        }    
-
     }
     void MovePlayer()
     {
@@ -87,38 +66,22 @@ public class PlayerController : MonoBehaviour
         {
             if (isGrounded)
             {
-                timeStamps = Time.time;
                 playerRb.AddForce(Vector3.up * jumpForce, ForceMode.Impulse);
                 jumpCounter++;
                 isGrounded = false;
             } else {
                 if (IsAbleToJump())
                 {
-                    timeStamps = Time.time;
-                    playerRb.AddForce(Vector3.up * jumpForce * 1.5f, ForceMode.Impulse);
+                    playerRb.velocity = Vector3.zero;
+                    playerRb.AddForce(Vector3.up * jumpForce, ForceMode.Impulse);
                     jumpCounter++;
                 }
             }
         }
     }
 
-    void ConstrainPlayerPosition()
-    {
-        transform.position = new Vector3(transform.position.x, transform.position.y, transform.position.z);
-    }
-
     bool IsAbleToJump()
     {
-        
-        return jumpCounter < maxJumpAmount && !IsOnCooldown(jumpCooldown);
+        return jumpCounter < maxJumpAmount;
     }
-
-    bool IsOnCooldown(float cooldown)
-    {
-        
-        return (Time.time - timeStamps) < cooldown;
-    }
-
-
-
 }

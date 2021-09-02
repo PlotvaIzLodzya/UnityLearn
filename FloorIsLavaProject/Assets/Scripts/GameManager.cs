@@ -8,19 +8,15 @@ public class GameManager : MonoBehaviour
     private GameObject player;
     public GameObject rebornPos;
     private GameObject[] platforms;
-    private SpawnManager spawnManager;
+    private SpawnManager _spawnManager;
     private GameObject powerUp;
 
-    private int exitKeyCounter;
+    public int exitKeyCounter = 0;
     public int maxExitKeyAmount = 1;
     public int levelCounter = 1 ;
 
-
-    public bool isPlatformRandomSpeed = true;
-    public bool lvlComplition = false;
-
-    public int lengthPlatformAmount = 20;
-    public int widthPlatformAmount = 4;
+    public int lengthPlatformAmount;
+    public int widthPlatformAmount;
 
     [SerializeField] private int _maxDuration = 10;
     [SerializeField] private int _minDuration = 1;
@@ -29,29 +25,31 @@ public class GameManager : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        spawnManager = FindObjectOfType<SpawnManager>().GetComponent<SpawnManager>();
+        _spawnManager = FindObjectOfType<SpawnManager>().GetComponent<SpawnManager>();
+        _spawnManager.LevelCreation();
         player = GameObject.Find("Player");
-        spawnManager.LevelCreation();
+        
     }
 
     // Update is called once per frame
-    void Update()
+    void FixedUpdate()
     {
         LevelComplition();
     }
 
     public void LevelComplition()
     {
-        exitKeyCounter = GameObject.FindGameObjectsWithTag("ExitKey").Length;
-        if (exitKeyCounter == 0)
+        if (exitKeyCounter >= maxExitKeyAmount)
         {
+            Debug.Log("exit key counter: " + exitKeyCounter);
+            exitKeyCounter = 0;
             levelCounter++;
-            Debug.Log("Level complete! Level: " + levelCounter);
-            DestroyingWorld();
             SetExitKeyAmout();
-            spawnManager.LevelCreation();
+            DestroyingWorld();
+            lengthPlatformAmount += levelCounter;
+            _spawnManager.LevelCreation();
             PlayerReborn();
-            lvlComplition = false;
+            Debug.Log("Level complete! Level: " + levelCounter);
         }
     }
 
@@ -86,7 +84,7 @@ public class GameManager : MonoBehaviour
 
     private void SetExitKeyAmout()
     {
-        if (levelCounter > 2)
+        if (levelCounter == 2)
         {
             maxExitKeyAmount++;
         }
