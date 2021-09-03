@@ -114,7 +114,7 @@ MonoBehaviour:
   _particales:
   - {fileID: 8242882111909989349}
   - {fileID: 8242882113158765240}
-  _thrower: 2
+  _throwerName: 2
 --- !u!65 &2680322934071115370
 BoxCollider:
   m_ObjectHideFlags: 0

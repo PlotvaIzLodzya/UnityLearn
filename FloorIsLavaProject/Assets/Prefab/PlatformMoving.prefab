@@ -12,6 +12,7 @@ GameObject:
   - component: {fileID: 4590069513642789004}
   - component: {fileID: 4590069513642789042}
   - component: {fileID: 6465300315304998485}
+  - component: {fileID: 3866371907176506809}
   m_Layer: 0
   m_Name: PlatformMoving
   m_TagString: Ground
@@ -93,6 +94,18 @@ MonoBehaviour:
     m_RotationOrder: 4
   _duration: 1
   _hight: 1.25
+--- !u!114 &3866371907176506809
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4590069513642789040}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2c81de842372e2946b5579e80a367002, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1001 &2711438640755363103
 PrefabInstance:
   m_ObjectHideFlags: 0

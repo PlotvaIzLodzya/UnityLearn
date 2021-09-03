@@ -2,12 +2,6 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-enum ObstacleCatalog
-{
-    OneWayThrower,
-    TwoWayThrower,
-    TwoWayThrowerShuriken
-}
 public class FlamerThrower : MonoBehaviour
 {
     [SerializeField] private float _speed = 3.0f;
@@ -15,11 +9,11 @@ public class FlamerThrower : MonoBehaviour
     [SerializeField] private float _rotationSpeed;
     [SerializeField] private ParticleSystem[] _particales;
     private GameManager _gameManager;
-    [SerializeField] ObstacleCatalog _thrower;
+    public ObstacleCatalog _throwerName;
     // Start is called before the first frame update
     void Start()
-    {   
-        foreach(ParticleSystem particle in _particales)
+    {
+        foreach (ParticleSystem particle in _particales)
             particle.Play();
             
         _gameManager = FindObjectOfType<GameManager>().GetComponent<GameManager>();

@@ -1,6 +1,13 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+public enum ObstacleCatalog
+{
+    OneWayThrower,
+    TwoWayThrower,
+    TwoWayThrowerShuriken
+}
+
 
 public class SpawnManager : MonoBehaviour
 {
@@ -13,6 +20,7 @@ public class SpawnManager : MonoBehaviour
     private GameManager _gameManager;
 
     public GameObject[] _decorations;
+    private ObstacleCatalog _thrower;
 
     private float powerUpPosY = 3.5f;
     public float platformPosY = 1.25f;
@@ -21,113 +29,140 @@ public class SpawnManager : MonoBehaviour
     private int _lavaStartAreaOffset = 5;
     private int _widthLavaAmount = 12;
     private Vector3 _platformStartPos = new Vector3(0, 1.25f, 0);
+    private Vector3 _cloudsLeftSide = new Vector3(0, 0, -20);
+    private Vector3 _cloudsRightSide = new Vector3(0, 0, 30);
 
-    private float lavaFloorDistance;
-    private float lavaCoveringMultiplier = 8;
     private float _distance = 4;
     private int _lastIdnex;
 
     public int platformCounter;
-    private int movingWallsAmount;
+    private int ObstaclesAmount;
 
     // Start is called before the first frame update
     void Start()
     {
-
-        lavaFloorDistance = lavaFloor.gameObject.GetComponent<BoxCollider>().size.x * lavaFloor.transform.localScale.x;
         _gameManager = FindObjectOfType<GameManager>().GetComponent<GameManager>();
-        movingWallsAmount = _gameManager.lengthPlatformAmount / 5;
+        ObstaclesAmount = _gameManager.lengthPlatformAmount / 5;
     }
     public void LevelCreation()
     {
+        LevelObjectGeneration(platform,
+                      _platformStartPos,
+                      _distance,
+                      _gameManager.lengthPlatformAmount, _gameManager.widthPlatformAmount);
+
+        LevelObjectGeneration(lavaFloor2,
+                      _lavaStartPos,
+                      _distance,
+                      _gameManager.lengthPlatformAmount + _lavaStartAreaOffset,
+                      _widthLavaAmount);
+
         for (int i = 0; i < _gameManager.maxExitKeyAmount; i++)
-            ObjectRandomSpawn(exitKey, new Vector3(_gameManager.lengthPlatformAmount / 2, 0, _platformStartPos.z));
+            ObjectRandomSpawnOnPillar(exitKey, 2);
 
-        ObjectRandomSpawn(powerUp, new Vector3(_gameManager.lengthPlatformAmount / 4,0, _platformStartPos.z));
+        ObjectRandomSpawnOnPillar(powerUp, 3);
 
-        LevelObjectGeneration(lavaFloor2, _lavaStartPos, _distance, _gameManager.lengthPlatformAmount +_lavaStartAreaOffset, _widthLavaAmount);
-        LevelObjectGeneration(platform, _platformStartPos, _distance, _gameManager.lengthPlatformAmount, _gameManager.widthPlatformAmount);
+        DecorPlacing(_cloudsLeftSide, _gameManager.lengthPlatformAmount);
+        DecorPlacing(_cloudsRightSide, _gameManager.lengthPlatformAmount);
 
-        DecorPlacing();
-
-        StartCoroutine(SpawnThrower((int)ObstacleCatalog.OneWayThrower));
+        StartCoroutine(SpawnThrower(ObstacleCatalog.OneWayThrower));
 
         if(_gameManager.levelCounter > 4)
-            StartCoroutine(SpawnThrower((int)ObstacleCatalog.TwoWayThrower));
+            StartCoroutine(SpawnThrower(ObstacleCatalog.TwoWayThrower));
         
         if(_gameManager.levelCounter > 5)
-            StartCoroutine(SpawnThrower((int)ObstacleCatalog.TwoWayThrowerShuriken));
-    }
+            StartCoroutine(SpawnThrower(ObstacleCatalog.TwoWayThrowerShuriken));
+    }    
 
-    private Vector3 GenerateRandomPos(int xStartPos, int zStartPos)
+    private void LevelObjectGeneration(GameObject _object, Vector3 startPos, float _distance, int xObjectAmount, int zObjectAmount)
     {
-        int posX = Random.Range(xStartPos, _gameManager.lengthPlatformAmount) * (int)_distance;
-        int posZ = Random.Range(zStartPos, _gameManager.widthPlatformAmount) * (int)_distance;
-        Vector3 position = new Vector3(posX, powerUpPosY, posZ);
-        return position;
-    }
-    
-
-    private void LevelObjectGeneration(GameObject _object, Vector3 startPos, float _distance, int xPlatformAmount, int zPlatformAmount)
-    {
-        for (int x = 0; x < xPlatformAmount; x++)
+        for (int x = 0; x < xObjectAmount; x++)
         {
-            for (int z = 0; z < zPlatformAmount; z++)
+            for (int z = 0; z < zObjectAmount; z++)
             {
-                float posX = startPos.x + x * _distance;
-                float posZ = startPos.z + z * _distance;
-                Vector3 platformPos = new Vector3(posX, _object.transform.position.y, posZ); ;
-                Instantiate(_object, platformPos, _object.transform.rotation);
+                Instantiate(_object,
+                            CalculatePos(startPos, _distance, new Vector3( x, _object.transform.position.y, z)),
+                            _object.transform.rotation);
             }
         }
     }
 
-    private void DecorPlacing()
+    private void DecorPlacing(Vector3 _startPos, int length)
     {
-        for (int i = 1; i <= _gameManager.lengthPlatformAmount / lavaCoveringMultiplier; i++)
+        for (int _xPos = 1; _xPos <= length; _xPos++)
         {
-            float posX = i * lavaFloorDistance;
-            DecorPlacing(posX, -20);
-            DecorPlacing(posX, 30);            
+            int index = DecorChooser();
+            Instantiate(_decorations[index],
+                        CalculatePos(_startPos, _distance, new Vector3(_xPos, 0, _decorations[index].transform.position.y)),
+                        _decorations[index].transform.rotation);
         }
     }
 
-    private void DecorPlacing(float posX, float posZ)
+    public void ObjectRandomSpawnOnPillar(GameObject objectToSpawn, int _magicDivider)
     {
-        int curIndex = Random.Range(0, _decorations.Length);
-        if (curIndex != _lastIdnex)
-        {
-            Instantiate(_decorations[curIndex], new Vector3(posX, 0, posZ), _decorations[curIndex].transform.rotation);
-            _lastIdnex = curIndex;
-        }
-        else
-            DecorPlacing(posX, posZ);
+        Instantiate(objectToSpawn,
+                    SpawnOnPillar(_magicDivider),
+                    objectToSpawn.transform.rotation);
     }
 
-
-    private void FlameThrowerCreation(int throwerIndex)
-    {
-        for(int i = 0; i < movingWallsAmount; i++)
-        {
-            float posX = Random.Range(2, _gameManager.lengthPlatformAmount) * _distance - _flameThrowerOffset;
-            float posZ = -15.0f;
-            Vector3 wallPos = new Vector3(posX, _throwers[throwerIndex].transform.position.y, posZ);
-            Instantiate(_throwers[throwerIndex], wallPos, _throwers[throwerIndex].transform.rotation);
-        }
-    }
-
-    public void ObjectRandomSpawn(GameObject objectToSpawn, Vector3 _startPos)
-    {
-        Instantiate(objectToSpawn, GenerateRandomPos((int)_startPos.x, (int)_startPos.z), objectToSpawn.transform.rotation);
-    }
-
-    IEnumerator SpawnThrower(int throwerIndex)
+    IEnumerator SpawnThrower(ObstacleCatalog _thrower)
     {
         while (true)
         {
             int spawnRate = Random.Range(5, 10);
             yield return new WaitForSeconds(spawnRate);
-            FlameThrowerCreation(throwerIndex);
+            FlameThrowerCreation(_thrower);
         }
+    }
+    private void FlameThrowerCreation(ObstacleCatalog _thrower)
+    {
+        for (int i = 0; i < ObstaclesAmount; i++)
+        {
+            float posX = Random.Range(2, _gameManager.lengthPlatformAmount) * _distance - _flameThrowerOffset;
+            float posZ = -15.0f;
+            Vector3 _flameThrowerPos = new Vector3(posX, _throwers[ThrowerPicker(_thrower)].transform.position.y, posZ);
+
+            Instantiate(_throwers[ThrowerPicker(_thrower)],
+                        _flameThrowerPos,
+                        _throwers[ThrowerPicker(_thrower)].transform.rotation);
+        }
+    }
+
+    private int ThrowerPicker(ObstacleCatalog _thrower)
+    {
+        int index = 0;
+        for(int i = 0; i<_throwers.Length; i++)
+        {
+            if (_thrower == _throwers[i].GetComponent<FlamerThrower>()._throwerName)
+                index = i;
+        }
+        return index;
+    }
+
+    private Vector3 CalculatePos(Vector3 startPos, float _distance, Vector3 _pos)
+    {
+        float posX = startPos.x + _pos.x * _distance;
+        float posZ = startPos.z + _pos.z * _distance;
+        Vector3 _objectPos = new Vector3(posX, _pos.y, posZ);
+        return _objectPos;
+    }
+
+    private int DecorChooser()
+    {
+        int curIndex = Random.Range(0, _decorations.Length);
+        if (curIndex != _lastIdnex)
+            _lastIdnex = curIndex;
+        else
+            DecorChooser();
+
+        return curIndex;
+    }
+    
+    private Vector3 SpawnOnPillar(int _magicDivider)
+    {
+        PositionOnScene[] _pillarsPos = FindObjectsOfType<PositionOnScene>();
+        int _index = Random.Range(0, _pillarsPos.Length / _magicDivider); // this _magicDivider give me opprtunity to spawn thing in the end of line. For example if _magicDivider = 2 it will get all pillars in second half of the line, i just hope it will work in all situation xD, the more divider is the closes to the end of the line it will pick pillars
+        Vector3 _offset = new Vector3(0, powerUpPosY, 0);
+        return _pillarsPos[_index].GetPos()+ _offset;
     }
 }
