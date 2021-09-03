@@ -7,7 +7,8 @@ public class SpawnManager : MonoBehaviour
     public GameObject powerUp;
     public GameObject platform;
     public GameObject[] _throwers;
-    public GameObject lavaFloor;
+    [SerializeField] private GameObject lavaFloor;
+    [SerializeField] private GameObject lavaFloor2;
     public GameObject exitKey;
     private GameManager _gameManager;
 
@@ -15,13 +16,15 @@ public class SpawnManager : MonoBehaviour
 
     private float powerUpPosY = 3.5f;
     public float platformPosY = 1.25f;
-    private float movingWallsOffset = 2.0f;
-    private int xStartPos = 0;
-    private int zStartPos = 0;
+    private float _flameThrowerOffset = 2.0f;
+    private Vector3 _lavaStartPos = new Vector3(-20, 0, -20);
+    private int _lavaStartAreaOffset = 5;
+    private int _widthLavaAmount = 12;
+    private Vector3 _platformStartPos = new Vector3(0, 1.25f, 0);
 
     private float lavaFloorDistance;
     private float lavaCoveringMultiplier = 8;
-    private int distance = 4;
+    private float _distance = 4;
     private int _lastIdnex;
 
     public int platformCounter;
@@ -38,53 +41,55 @@ public class SpawnManager : MonoBehaviour
     public void LevelCreation()
     {
         for (int i = 0; i < _gameManager.maxExitKeyAmount; i++)
-            ObjectRandomSpawn(exitKey, _gameManager.lengthPlatformAmount / 2, zStartPos);
+            ObjectRandomSpawn(exitKey, new Vector3(_gameManager.lengthPlatformAmount / 2, 0, _platformStartPos.z));
 
-        ObjectRandomSpawn(powerUp, _gameManager.lengthPlatformAmount / 4, zStartPos);
-        LvlObjectPlacing();
-        PlatformPlacing();
-        StartCoroutine(SpawnThrower((int)ThrowerCatalog.OneWayThrower));
+        ObjectRandomSpawn(powerUp, new Vector3(_gameManager.lengthPlatformAmount / 4,0, _platformStartPos.z));
+
+        LevelObjectGeneration(lavaFloor2, _lavaStartPos, _distance, _gameManager.lengthPlatformAmount +_lavaStartAreaOffset, _widthLavaAmount);
+        LevelObjectGeneration(platform, _platformStartPos, _distance, _gameManager.lengthPlatformAmount, _gameManager.widthPlatformAmount);
+
+        DecorPlacing();
+
+        StartCoroutine(SpawnThrower((int)ObstacleCatalog.OneWayThrower));
 
         if(_gameManager.levelCounter > 5)
-            StartCoroutine(SpawnThrower((int)ThrowerCatalog.TwoWayThrower));
+            StartCoroutine(SpawnThrower((int)ObstacleCatalog.TwoWayThrower));
     }
 
     private Vector3 GenerateRandomPos(int xStartPos, int zStartPos)
     {
-        int posX = Random.Range(xStartPos, _gameManager.lengthPlatformAmount) * distance;
-        int posZ = Random.Range(zStartPos, _gameManager.widthPlatformAmount) * distance;
+        int posX = Random.Range(xStartPos, _gameManager.lengthPlatformAmount) * (int)_distance;
+        int posZ = Random.Range(zStartPos, _gameManager.widthPlatformAmount) * (int)_distance;
         Vector3 position = new Vector3(posX, powerUpPosY, posZ);
         return position;
     }
     
 
-    private void PlatformPlacing()
+    private void LevelObjectGeneration(GameObject _object, Vector3 startPos, float _distance, int xPlatformAmount, int zPlatformAmount)
     {
-        for(int x = xStartPos; x < _gameManager.lengthPlatformAmount; x++)
+        for (int x = 0; x < xPlatformAmount; x++)
         {
-            for(int z = zStartPos; z< _gameManager.widthPlatformAmount; z++)
+            for (int z = 0; z < zPlatformAmount; z++)
             {
-                int posX = x * distance;
-                int posZ = z * distance;
-                Vector3 platformPos = new Vector3(posX, platformPosY, posZ);
-                Instantiate(platform, platformPos, platform.transform.rotation);
+                float posX = startPos.x + x * _distance;
+                float posZ = startPos.z + z * _distance;
+                Vector3 platformPos = new Vector3(posX, _object.transform.position.y, posZ); ;
+                Instantiate(_object, platformPos, _object.transform.rotation);
             }
         }
     }
 
-    private void LvlObjectPlacing()
+    private void DecorPlacing()
     {
         for (int i = 1; i <= _gameManager.lengthPlatformAmount / lavaCoveringMultiplier; i++)
         {
             float posX = i * lavaFloorDistance;
-            PlaceDecoration(posX, -20);
-            PlaceDecoration(posX, 30);
-            Instantiate(lavaFloor, new Vector3(posX, 0, 5), lavaFloor.transform.rotation);
-            
+            DecorPlacing(posX, -20);
+            DecorPlacing(posX, 30);            
         }
     }
 
-    private void PlaceDecoration(float posX, float posZ)
+    private void DecorPlacing(float posX, float posZ)
     {
         int curIndex = Random.Range(0, _decorations.Length);
         if (curIndex != _lastIdnex)
@@ -93,7 +98,7 @@ public class SpawnManager : MonoBehaviour
             _lastIdnex = curIndex;
         }
         else
-            PlaceDecoration(posX, posZ);
+            DecorPlacing(posX, posZ);
     }
 
 
@@ -101,17 +106,16 @@ public class SpawnManager : MonoBehaviour
     {
         for(int i = 0; i < movingWallsAmount; i++)
         {
-            
-            float posX = Random.Range(2, _gameManager.lengthPlatformAmount) * distance - movingWallsOffset;
+            float posX = Random.Range(2, _gameManager.lengthPlatformAmount) * _distance - _flameThrowerOffset;
             float posZ = -15.0f;
             Vector3 wallPos = new Vector3(posX, _throwers[throwerIndex].transform.position.y, posZ);
             Instantiate(_throwers[throwerIndex], wallPos, _throwers[throwerIndex].transform.rotation);
         }
     }
 
-    public void ObjectRandomSpawn(GameObject objectToSpawn, int xStartPos, int zStartPos)
+    public void ObjectRandomSpawn(GameObject objectToSpawn, Vector3 _startPos)
     {
-        Instantiate(objectToSpawn, GenerateRandomPos(xStartPos, zStartPos), objectToSpawn.transform.rotation);
+        Instantiate(objectToSpawn, GenerateRandomPos((int)_startPos.x, (int)_startPos.z), objectToSpawn.transform.rotation);
     }
 
     IEnumerator SpawnThrower(int throwerIndex)

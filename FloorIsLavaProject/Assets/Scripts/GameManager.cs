@@ -56,6 +56,7 @@ public class GameManager : MonoBehaviour
     public void PlayerReborn()
     {
         player.transform.position = rebornPos.transform.position;
+        player.transform.rotation = Quaternion.Euler(new Vector3(0,90.0f,0));
     }
 
     private void DestroyingWorld()

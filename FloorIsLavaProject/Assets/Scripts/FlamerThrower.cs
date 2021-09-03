@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-enum ThrowerCatalog
+enum ObstacleCatalog
 {
     OneWayThrower,
     TwoWayThrower
@@ -13,7 +13,7 @@ public class FlamerThrower : MonoBehaviour
     private float leftMaxPos = 40.0f;
     [SerializeField] private ParticleSystem[] _particales;
     private GameManager _gameManager;
-    [SerializeField] ThrowerCatalog thrower;
+    [SerializeField] ObstacleCatalog thrower;
     // Start is called before the first frame update
     void Start()
     {   
@@ -30,7 +30,7 @@ public class FlamerThrower : MonoBehaviour
     {
         transform.Translate(Vector3.forward * speed * Time.deltaTime, Space.World);
         DestroyOutOfBounds();
-        if(this.thrower == ThrowerCatalog.TwoWayThrower)
+        if(this.thrower == ObstacleCatalog.TwoWayThrower)
         {
             transform.Rotate(Vector3.right * speed*10* Time.deltaTime);
         }
