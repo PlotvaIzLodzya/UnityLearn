@@ -52,8 +52,11 @@ public class SpawnManager : MonoBehaviour
 
         StartCoroutine(SpawnThrower((int)ObstacleCatalog.OneWayThrower));
 
-        if(_gameManager.levelCounter > 5)
+        if(_gameManager.levelCounter > 4)
             StartCoroutine(SpawnThrower((int)ObstacleCatalog.TwoWayThrower));
+        
+        if(_gameManager.levelCounter > 5)
+            StartCoroutine(SpawnThrower((int)ObstacleCatalog.TwoWayThrowerShuriken));
     }
 
     private Vector3 GenerateRandomPos(int xStartPos, int zStartPos)
