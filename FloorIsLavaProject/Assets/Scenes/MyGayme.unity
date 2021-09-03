@@ -515,6 +515,9 @@ GameObject:
   m_Component:
   - component: {fileID: 205936783}
   - component: {fileID: 205936784}
+  - component: {fileID: 205936785}
+  - component: {fileID: 205936786}
+  - component: {fileID: 205936787}
   m_Layer: 0
   m_Name: SpawnManager
   m_TagString: Untagged
@@ -551,13 +554,10 @@ MonoBehaviour:
   powerUp: {fileID: 8514012440105710455, guid: f315cdf4a7a80814897a33b5707d8a83, type: 3}
   platform: {fileID: 4590069513642789040, guid: e84041347e810ff40beeea125f636ac3,
     type: 3}
-  _throwers:
-  - {fileID: 2630653239745125439, guid: ed3a718124cff6e4aa21208277b9f33e, type: 3}
-  - {fileID: 2630653239745125439, guid: 6cf1c0aa1aaba024ebc81ddf931eccf2, type: 3}
-  - {fileID: 2680322934071115152, guid: b224bd3fb9689df4caab776023b35b82, type: 3}
-  lavaFloor: {fileID: 3936092709024119553, guid: 6f2c4b611396ad84b9611df2155127b0,
-    type: 3}
-  lavaFloor2: {fileID: 1301059258062959360, guid: c148468c36e30a943a813513e90229f7,
+  _spawnItems: {fileID: 205936785}
+  _spawnObstacle: {fileID: 205936786}
+  _lvlGenerator: {fileID: 205936787}
+  _lavaFloor: {fileID: 1301059258062959360, guid: c148468c36e30a943a813513e90229f7,
     type: 3}
   exitKey: {fileID: 2950102865110463181, guid: 41394956bcb284943b996a39a0c47f7f, type: 3}
   _decorations:
@@ -566,8 +566,53 @@ MonoBehaviour:
   - {fileID: 5924965149171525750, guid: 3b0ebe3a3848a1942a2431640a66f84a, type: 3}
   - {fileID: 3251209155545117525, guid: 24fdf91398b82054e8baa6df339ea1d8, type: 3}
   - {fileID: 4520062079233242379, guid: db360cb6561076747bc6526e90fba9ff, type: 3}
-  platformPosY: 1.25
-  platformCounter: 0
+  ObstaclesAmount: 0
+--- !u!114 &205936785
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 205936782}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0bb292e91f5d81141bdbf8c5dea785f5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &205936786
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 205936782}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 869dd2588c05d6745ad7b15b0314fee7, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _throwers:
+  - {fileID: 2630653239745125439, guid: ed3a718124cff6e4aa21208277b9f33e, type: 3}
+  - {fileID: 2630653239745125439, guid: 6cf1c0aa1aaba024ebc81ddf931eccf2, type: 3}
+  - {fileID: 2680322934071115152, guid: b224bd3fb9689df4caab776023b35b82, type: 3}
+--- !u!114 &205936787
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 205936782}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e1ae75ad513231d4cb2cde373747d123, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _decorations:
+  - {fileID: 8764513791184009259, guid: ce251e3bf856d7c4797f1f2bd3df50ba, type: 3}
+  - {fileID: 2821390510391971518, guid: ae48bc3948824234a8fa9e48dca08200, type: 3}
+  - {fileID: 5924965149171525750, guid: 3b0ebe3a3848a1942a2431640a66f84a, type: 3}
+  - {fileID: 3251209155545117525, guid: 24fdf91398b82054e8baa6df339ea1d8, type: 3}
+  - {fileID: 4520062079233242379, guid: db360cb6561076747bc6526e90fba9ff, type: 3}
 --- !u!4 &208704192 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 8935169468115520728, guid: 0f20af2edc790974bb29f0134518246c,
@@ -2773,6 +2818,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Mass
       value: 40
+      objectReference: {fileID: 0}
+    - target: {fileID: 1141017236169770269, guid: a764bbb71d5112b4cbd8b78f8840207f,
+        type: 3}
+      propertyPath: m_Constraints
+      value: 112
       objectReference: {fileID: 0}
     - target: {fileID: 1141017236169770271, guid: a764bbb71d5112b4cbd8b78f8840207f,
         type: 3}
