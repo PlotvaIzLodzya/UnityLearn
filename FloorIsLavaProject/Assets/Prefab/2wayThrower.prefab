@@ -14,6 +14,7 @@ GameObject:
   - component: {fileID: 2630653239745126336}
   - component: {fileID: 2630653239745126340}
   - component: {fileID: 2630653239745126341}
+  - component: {fileID: -5464370206148474103}
   m_Layer: 0
   m_Name: 2wayThrower
   m_TagString: Ground
@@ -60,6 +61,7 @@ MeshRenderer:
   m_LightProbeUsage: 1
   m_ReflectionProbeUsage: 1
   m_RayTracingMode: 2
+  m_RayTraceProcedural: 0
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
@@ -84,6 +86,7 @@ MeshRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
+  m_AdditionalVertexStreams: {fileID: 0}
 --- !u!65 &2630653239745126336
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -114,6 +117,8 @@ MonoBehaviour:
   _particales:
   - {fileID: 7758169119847608789}
   - {fileID: 7721302488493593529}
+  _utility: {fileID: 5687060268902521046, guid: ed3a718124cff6e4aa21208277b9f33e,
+    type: 3}
   _throwerName: 1
 --- !u!65 &2630653239745126341
 BoxCollider:
@@ -128,6 +133,18 @@ BoxCollider:
   serializedVersion: 2
   m_Size: {x: 1.7367193, y: 5.4414935, z: 1.8603535}
   m_Center: {x: 0.07999998, y: 3.5617542, z: 0.057732582}
+--- !u!114 &-5464370206148474103
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2630653239745125439}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3c2a7c1bdfa49e24ab07abf7a8f0f075, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1001 &7721302488513394349
 PrefabInstance:
   m_ObjectHideFlags: 0

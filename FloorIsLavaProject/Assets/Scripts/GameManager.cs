@@ -5,11 +5,12 @@ using UnityEngine;
 public class GameManager : MonoBehaviour
 {
     
-    private GameObject player;
+    private GameObject _player;
     public GameObject rebornPos;
     private GameObject[] platforms;
     private SpawnManager _spawnManager;
     private GameObject powerUp;
+    [SerializeField] float _yPosReborn = -350;
 
     public int exitKeyCounter = 0;
     public int maxExitKeyAmount = 1;
@@ -27,14 +28,16 @@ public class GameManager : MonoBehaviour
     {
         _spawnManager = FindObjectOfType<SpawnManager>().GetComponent<SpawnManager>();
         _spawnManager.LevelCreation();
-        player = GameObject.Find("Player");
+        _player = GameObject.Find("Player");
         
     }
 
     // Update is called once per frame
     void FixedUpdate()
     {
+        BoundsForThePlayer();
         LevelComplition();
+
     }
 
     public void LevelComplition()
@@ -55,8 +58,9 @@ public class GameManager : MonoBehaviour
 
     public void PlayerReborn()
     {
-        player.transform.position = rebornPos.transform.position;
-        player.transform.rotation = Quaternion.Euler(new Vector3(0,90.0f,0));
+        _player.GetComponent<Rigidbody>().velocity = Vector3.zero;
+        _player.transform.position = rebornPos.transform.position;
+        _player.transform.rotation = Quaternion.Euler(new Vector3(0,90.0f,0));
     }
 
     private void DestroyingWorld()
@@ -92,6 +96,14 @@ public class GameManager : MonoBehaviour
         if(levelCounter > 5)
         {
             maxExitKeyAmount = 3;
+        }
+    }
+
+    private void BoundsForThePlayer()
+    {
+        if (_player.transform.position.y < _yPosReborn)
+        {
+            PlayerReborn();
         }
     }
 }

@@ -52,8 +52,8 @@ public class SpawnManager : MonoBehaviour
 
         _spawnItems.ObjectRandomSpawnOnPillar(powerUp, 3);
 
-        _lvlGenerator.DecorPlacing(_cloudsLeftSide, _gameManager.lengthPlatformAmount);
-        _lvlGenerator.DecorPlacing(_cloudsRightSide, _gameManager.lengthPlatformAmount);
+        _lvlGenerator.LevelBordersPlacing(_cloudsLeftSide, _gameManager.lengthPlatformAmount);
+        _lvlGenerator.LevelBordersPlacing(_cloudsRightSide, _gameManager.lengthPlatformAmount);
 
         StartCoroutine(_spawnObstacle.SpawnThrower(ObstacleCatalog.OneWayThrower));
 

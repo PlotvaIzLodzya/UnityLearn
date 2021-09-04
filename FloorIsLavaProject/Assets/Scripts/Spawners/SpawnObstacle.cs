@@ -50,7 +50,7 @@ public class SpawnObstacle : MonoBehaviour
         int index = 0;
         for (int i = 0; i < _throwers.Length; i++)
         {
-            if (_thrower == _throwers[i].GetComponent<FlamerThrower>()._throwerName)
+            if (_thrower == _throwers[i].GetComponent<FlameThrower>()._throwerName)
                 index = i;
         }
         return index;

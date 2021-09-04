@@ -30,14 +30,7 @@ public class LvlGenerator : MonoBehaviour
             }
         }
     }
-    private Vector3 CalculatePos(Vector3 startPos, float _distance, Vector3 _pos)
-    {
-        float posX = startPos.x + _pos.x * _distance;
-        float posZ = startPos.z + _pos.z * _distance;
-        Vector3 _objectPos = new Vector3(posX, _pos.y, posZ);
-        return _objectPos;
-    }
-    public void DecorPlacing(Vector3 _startPos, int length)
+    public void LevelBordersPlacing(Vector3 _startPos, int length)
     {
         for (int _xPos = 1; _xPos <= length; _xPos++)
         {
@@ -47,6 +40,14 @@ public class LvlGenerator : MonoBehaviour
                         _decorations[index].transform.rotation);
         }
     }
+    private Vector3 CalculatePos(Vector3 startPos, float _distance, Vector3 _pos)
+    {
+        float posX = startPos.x + _pos.x * _distance;
+        float posZ = startPos.z + _pos.z * _distance;
+        Vector3 _objectPos = new Vector3(posX, _pos.y, posZ);
+        return _objectPos;
+    }
+
     private int DecorChooser()
     {
         int curIndex = Random.Range(0, _decorations.Length);
