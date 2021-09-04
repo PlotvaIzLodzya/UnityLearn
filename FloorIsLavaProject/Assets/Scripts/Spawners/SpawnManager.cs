@@ -36,6 +36,7 @@ public class SpawnManager : MonoBehaviour
     }
     public void LevelCreation()
     {
+        _gameManager.lengthPlatformAmount = _gameManager.levelCounter * _gameManager._platformAmountPerLvl;
         _lvlGenerator.LevelObjectGeneration(platform,
                       _platformStartPos,
                       _distance,

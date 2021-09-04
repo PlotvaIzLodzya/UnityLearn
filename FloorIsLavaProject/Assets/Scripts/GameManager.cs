@@ -18,6 +18,7 @@ public class GameManager : MonoBehaviour
 
     public int lengthPlatformAmount;
     public int widthPlatformAmount;
+    public int _platformAmountPerLvl = 5;
 
     [SerializeField] private int _maxDuration = 6;
     [SerializeField] private int _minDuration = 3;
@@ -49,7 +50,7 @@ public class GameManager : MonoBehaviour
             levelCounter++;
             SetExitKeyAmout();
             DestroyingWorld();
-            lengthPlatformAmount += levelCounter;
+            
             _spawnManager.LevelCreation();
             PlayerReborn();
             Debug.Log("Level complete! Level: " + levelCounter);

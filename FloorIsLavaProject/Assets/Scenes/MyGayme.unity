@@ -5524,8 +5524,8 @@ BoxCollider:
   m_IsTrigger: 1
   m_Enabled: 0
   serializedVersion: 2
-  m_Size: {x: 1.1998715, y: 3.2413049, z: 1.1770976}
-  m_Center: {x: 0.02838693, y: 1.4153135, z: -0.0007479787}
+  m_Size: {x: 2.0152156, y: 3.4856038, z: 1.1770976}
+  m_Center: {x: 0.005006736, y: 1.293164, z: -0.0007479787}
 --- !u!1001 &1363547475
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -5989,6 +5989,7 @@ MonoBehaviour:
   levelCounter: 1
   lengthPlatformAmount: 5
   widthPlatformAmount: 4
+  _platformAmountPerLvl: 5
   _maxDuration: 6
   _minDuration: 3
 --- !u!4 &1438505103
