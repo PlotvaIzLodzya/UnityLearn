@@ -8,12 +8,13 @@ public class FlameThrower : MonoBehaviour
     private float leftMaxPos = 40.0f;
     [SerializeField] private float _rotationSpeed;
     [SerializeField] private ParticleSystem[] _particales;
-    [SerializeField] UtilityScripts _utility;
+    private UtilityScripts _utility;
     private GameManager _gameManager;
     public ObstacleCatalog _throwerName;
     // Start is called before the first frame update
     void Start()
     {
+        _utility = GetComponent<UtilityScripts>();
         foreach (ParticleSystem particle in _particales)
             particle.Play();
             
