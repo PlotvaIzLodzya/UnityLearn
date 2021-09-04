@@ -19,8 +19,8 @@ public class GameManager : MonoBehaviour
     public int lengthPlatformAmount;
     public int widthPlatformAmount;
 
-    [SerializeField] private int _maxDuration = 10;
-    [SerializeField] private int _minDuration = 1;
+    [SerializeField] private int _maxDuration = 6;
+    [SerializeField] private int _minDuration = 3;
 
 
     // Start is called before the first frame update

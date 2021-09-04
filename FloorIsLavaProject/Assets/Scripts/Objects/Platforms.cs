@@ -2,11 +2,11 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class NewLevitation : MonoBehaviour
+public class Platforms : MonoBehaviour
 {
     [SerializeField] private AnimationCurve _yTravel;
     UtilityScripts _utility;
-    public float _duration;
+    private float _duration;
     [SerializeField] private float _hight = 0.75f;
 
     private bool isStatic = false;
@@ -22,7 +22,7 @@ public class NewLevitation : MonoBehaviour
         if (_utility == null)
             _utility = FindObjectOfType<UtilityScripts>().GetComponent<UtilityScripts>();
 
-        SettingDuration(_gameManagerScript.DurationGeneration());
+        _duration = _gameManagerScript.DurationGeneration();
 
         isStatic = _gameManagerScript.IsPlatformStatic();
 
@@ -36,12 +36,4 @@ public class NewLevitation : MonoBehaviour
         if (!isStatic)
             _utility.Levitation(_yTravel, _duration, _hight);
     }
-
-    private void SettingDuration(int duration)
-    {
-        _duration = duration;
-    }
-
-
-
 }
