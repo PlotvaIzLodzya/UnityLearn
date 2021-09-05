@@ -18,11 +18,11 @@ public class Platforms : MonoBehaviour
     void Start()
     {
         _initialPos = transform.position;
+
         _gameManagerScript = FindObjectOfType<GameManager>().GetComponent<GameManager>();
         _utility = GetComponent<UtilityScripts>();
 
         _duration = _gameManagerScript.DurationGeneration();
-
         isStatic = _gameManagerScript.IsPlatformStatic();
 
         _yTravel.preWrapMode = WrapMode.PingPong;

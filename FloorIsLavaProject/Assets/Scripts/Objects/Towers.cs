@@ -17,8 +17,6 @@ public class Towers : MonoBehaviour
         _utility = GetComponent<UtilityScripts>();
         _animation.preWrapMode = WrapMode.PingPong;
         _animation.postWrapMode = WrapMode.PingPong;
-
-
     }
 
         // Update is called once per frame

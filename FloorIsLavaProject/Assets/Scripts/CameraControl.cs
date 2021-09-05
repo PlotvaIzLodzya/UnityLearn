@@ -17,18 +17,15 @@ public class CameraControl : MonoBehaviour
     // Update is called once per frame
     void LateUpdate()
     {
-        
         MoveCamera();
     }
 
     void MoveCamera()
     {
-        
         horizontalInput = Input.GetAxis("HorizontalCamera");
         verticalInput = Input.GetAxis("VerticalCamera");
         player.transform.Rotate(Vector3.up * Time.deltaTime * horizontalInput * sensitivity);
         transform.Translate(Vector3.up * verticalInput * Time.deltaTime);
         transform.LookAt(player.transform.position + offset);
-
     }
 }

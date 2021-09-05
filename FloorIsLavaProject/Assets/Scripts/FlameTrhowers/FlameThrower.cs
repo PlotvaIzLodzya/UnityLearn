@@ -15,6 +15,7 @@ public class FlameThrower : MonoBehaviour
     void Start()
     {
         _utility = GetComponent<UtilityScripts>();
+
         foreach (ParticleSystem particle in _particales)
             particle.Play();
             
