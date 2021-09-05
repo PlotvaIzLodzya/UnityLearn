@@ -1344,6 +1344,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6724216265250521857, guid: d0df7dd4ddba8af44a11aeb6f5315ac2,
         type: 3}
+      propertyPath: _distance
+      value: 15
+      objectReference: {fileID: 0}
+    - target: {fileID: 6724216265250521857, guid: d0df7dd4ddba8af44a11aeb6f5315ac2,
+        type: 3}
       propertyPath: _duration
       value: 15
       objectReference: {fileID: 0}
@@ -2328,8 +2333,8 @@ MonoBehaviour:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
-  _duration: 2
-  _distance: 1
+  _duration: 8
+  _distance: 10
 --- !u!1001 &460677220
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -5273,6 +5278,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6724216265250521857, guid: d0df7dd4ddba8af44a11aeb6f5315ac2,
         type: 3}
+      propertyPath: _distance
+      value: 5
+      objectReference: {fileID: 0}
+    - target: {fileID: 6724216265250521857, guid: d0df7dd4ddba8af44a11aeb6f5315ac2,
+        type: 3}
       propertyPath: _duration
       value: 7
       objectReference: {fileID: 0}
@@ -6939,8 +6949,13 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6724216265250521857, guid: d0df7dd4ddba8af44a11aeb6f5315ac2,
         type: 3}
+      propertyPath: _distance
+      value: 11
+      objectReference: {fileID: 0}
+    - target: {fileID: 6724216265250521857, guid: d0df7dd4ddba8af44a11aeb6f5315ac2,
+        type: 3}
       propertyPath: _duration
-      value: 30
+      value: 12
       objectReference: {fileID: 0}
     - target: {fileID: 6724216265250521857, guid: d0df7dd4ddba8af44a11aeb6f5315ac2,
         type: 3}
@@ -9285,6 +9300,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: Tower
+      objectReference: {fileID: 0}
+    - target: {fileID: 6724216265250521857, guid: d0df7dd4ddba8af44a11aeb6f5315ac2,
+        type: 3}
+      propertyPath: _distance
+      value: 5
       objectReference: {fileID: 0}
     - target: {fileID: 6724216265250521857, guid: d0df7dd4ddba8af44a11aeb6f5315ac2,
         type: 3}
