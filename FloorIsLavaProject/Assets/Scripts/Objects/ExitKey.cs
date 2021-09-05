@@ -11,6 +11,7 @@ public class ExitKey : MonoBehaviour
         {
             FindObjectOfType<GameManager>().GetComponent<GameManager>().exitKeyCounter++;
             Destroy(gameObject);
+            Debug.Log("exit key counter: " + FindObjectOfType<GameManager>().GetComponent<GameManager>().exitKeyCounter);
         }
     }
 }

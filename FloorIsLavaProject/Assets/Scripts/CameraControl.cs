@@ -4,7 +4,8 @@ using UnityEngine;
 
 public class CameraControl : MonoBehaviour
 {
-    public float sensitivity = 1;
+    public float _ySensitivity;
+    public float _xSensitivity;
     private float horizontalInput;
     private float verticalInput;
     public GameObject player;
@@ -24,8 +25,16 @@ public class CameraControl : MonoBehaviour
     {
         horizontalInput = Input.GetAxis("HorizontalCamera");
         verticalInput = Input.GetAxis("VerticalCamera");
-        player.transform.Rotate(Vector3.up * Time.deltaTime * horizontalInput * sensitivity);
-        transform.Translate(Vector3.up * verticalInput * Time.deltaTime);
+
+
+        Vector3 angle = Vector3.up * verticalInput * _xSensitivity * Time.deltaTime;
+        player.transform.Rotate(Vector3.up * horizontalInput * _ySensitivity * Time.deltaTime);
+
+        transform.Translate(angle);
+
         transform.LookAt(player.transform.position + offset);
-    }
+
+    }   
+
+
 }

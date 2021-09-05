@@ -38,14 +38,13 @@ public class GameManager : MonoBehaviour
     {
         BoundsForThePlayer();
         LevelComplition();
-
     }
 
     public void LevelComplition()
     {
         if (exitKeyCounter >= maxExitKeyAmount)
         {
-            Debug.Log("exit key counter: " + exitKeyCounter);
+
             exitKeyCounter = 0;
             levelCounter++;
             SetExitKeyAmout();
@@ -53,7 +52,6 @@ public class GameManager : MonoBehaviour
             
             _spawnManager.LevelCreation();
             PlayerReborn();
-            Debug.Log("Level complete! Level: " + levelCounter);
         }
     }
 
