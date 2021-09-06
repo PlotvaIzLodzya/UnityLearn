@@ -1,12 +1,14 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using Cinemachine;
 
 public class GameManager : MonoBehaviour
 {
     
     [SerializeField] GameObject _player;
     public GameObject rebornPos;
+    public CinemachineFreeLook _camera;
     [SerializeField] ParticleSystem _rebornParticle;
     private GameObject[] platforms;
     private SpawnManager _spawnManager;
@@ -61,10 +63,12 @@ public class GameManager : MonoBehaviour
     {
         _rebornParticle.Play();
         StartCoroutine(RebornTime());
-
+        Vector3 _cameraOffset = new Vector3(5, 0, 0);
         _player.GetComponent<Rigidbody>().velocity = Vector3.zero;
         _player.transform.position = rebornPos.transform.position;
         _player.transform.rotation = Quaternion.Euler(new Vector3(0, 90.0f, 0));
+        _camera.ForceCameraPosition(rebornPos.transform.position - _cameraOffset, Quaternion.Euler(Vector3.zero));
+        _camera.m_YAxis.Value = 0.5f;
 
     }
 

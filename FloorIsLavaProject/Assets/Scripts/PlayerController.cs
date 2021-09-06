@@ -1,12 +1,13 @@
 ﻿ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using Cinemachine;
 
 public class PlayerController : MonoBehaviour
 {
     public float _speed = 5;
     public float jumpForce = 490 ;
-
+    public CinemachineFreeLook _camera1;
     private Rigidbody _playerRb;
     public Camera _camera;
 
