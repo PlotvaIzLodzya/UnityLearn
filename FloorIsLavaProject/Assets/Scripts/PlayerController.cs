@@ -8,13 +8,15 @@ public class PlayerController : MonoBehaviour
     public float jumpForce = 490 ;
 
     private Rigidbody _playerRb;
+    public Camera _camera;
 
     private bool isGrounded;
 
     private int jumpCounter = 0;
     public int maxJumpAmount = 1;
     private int gravityModifier = 4;
-    private Vector3 _motion;
+
+    Vector3 _normal;
 
 
 
@@ -28,12 +30,16 @@ public class PlayerController : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        //Vector3 _forward = _camera.transform.forward;
+        //Vector3 _right = _camera.transform.right;
+
         jumpPlayer();
         MovePlayer();
     }
 
     private void OnCollisionEnter(Collision collision)
     {
+        _normal = collision.contacts[0].normal;
         if (collision.gameObject.CompareTag("Ground"))
         {
             isGrounded = true;
@@ -59,15 +65,13 @@ public class PlayerController : MonoBehaviour
         {
             if (isGrounded)
             {
-                _playerRb.AddForce(Vector3.up * jumpForce, ForceMode.Impulse);
-                jumpCounter++;
+                Jump();
                 isGrounded = false;
             } else {
                 if (IsAbleToJump())
                 {
                     _playerRb.velocity = Vector3.zero;
-                    _playerRb.AddForce(Vector3.up * jumpForce, ForceMode.Impulse);
-                    jumpCounter++;
+                    Jump();
                 }
             }
         }
@@ -77,12 +81,25 @@ public class PlayerController : MonoBehaviour
     {
         return jumpCounter < maxJumpAmount;
     }
+
+    private void Jump()
+    {
+        _playerRb.AddForce(Vector3.up * jumpForce, ForceMode.Impulse);
+        jumpCounter++;
+    }
     void MovePlayer()
     {
         float horizontalInput = Input.GetAxis("Horizontal");
         float verticalInput = Input.GetAxis("Vertical");
-        transform.Translate(Vector3.forward * _speed * Time.deltaTime * verticalInput, Space.Self);
-        transform.Translate(Vector3.right * _speed * Time.deltaTime * horizontalInput, Space.Self);
+        transform.rotation = Quaternion.LookRotation(new Vector3(Camera.main.transform.forward.x, 0, Camera.main.transform.forward.z));
+
+       transform.Translate(Project(_camera.transform.forward).normalized * _speed * Time.deltaTime * verticalInput, Space.World);
+       transform.Translate(Project(_camera.transform.right).normalized *  _speed * Time.deltaTime * horizontalInput, Space.World);
+    }
+
+    public Vector3 Project (Vector3 _forward)
+    {
+        return _forward - Vector3.Dot(_forward, _normal) * _normal;
     }
 
 }

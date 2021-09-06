@@ -59,7 +59,8 @@ public class GameManager : MonoBehaviour
     {
         _player.GetComponent<Rigidbody>().velocity = Vector3.zero;
         _player.transform.position = rebornPos.transform.position;
-        _player.transform.rotation = Quaternion.Euler(new Vector3(0,90.0f,0));
+
+        //_player.transform.rotation = Quaternion.Euler(new Vector3(0,90.0f,0));
     }
 
     private void DestroyingWorld()
