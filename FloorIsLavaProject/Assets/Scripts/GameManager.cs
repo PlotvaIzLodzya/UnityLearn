@@ -5,12 +5,14 @@ using UnityEngine;
 public class GameManager : MonoBehaviour
 {
     
-    private GameObject _player;
+    [SerializeField] GameObject _player;
     public GameObject rebornPos;
+    [SerializeField] ParticleSystem _rebornParticle;
     private GameObject[] platforms;
     private SpawnManager _spawnManager;
     private GameObject powerUp;
-    [SerializeField] float _yPosReborn = -350;
+    [SerializeField] float _yPosDestroyBounds = -350;
+
 
     public int exitKeyCounter = 0;
     public int maxExitKeyAmount = 1;
@@ -57,10 +59,13 @@ public class GameManager : MonoBehaviour
 
     public void PlayerReborn()
     {
+        _rebornParticle.Play();
+        StartCoroutine(RebornTime());
+
         _player.GetComponent<Rigidbody>().velocity = Vector3.zero;
         _player.transform.position = rebornPos.transform.position;
+        _player.transform.rotation = Quaternion.Euler(new Vector3(0, 90.0f, 0));
 
-        //_player.transform.rotation = Quaternion.Euler(new Vector3(0,90.0f,0));
     }
 
     private void DestroyingWorld()
@@ -101,9 +106,16 @@ public class GameManager : MonoBehaviour
 
     private void BoundsForThePlayer()
     {
-        if (_player.transform.position.y < _yPosReborn)
+        if (_player.transform.position.y < _yPosDestroyBounds)
         {
             PlayerReborn();
         }
+    }
+
+    private IEnumerator RebornTime()
+    {
+        _player.GetComponent<PlayerController>()._isRebornTime = true;
+        yield return new WaitForSeconds(2.1f);
+        _player.GetComponent<PlayerController>()._isRebornTime = false;
     }
 }

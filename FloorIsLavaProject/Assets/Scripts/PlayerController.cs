@@ -17,7 +17,7 @@ public class PlayerController : MonoBehaviour
     private int gravityModifier = 4;
 
     Vector3 _normal;
-
+    public bool _isRebornTime;
 
 
     // Start is called before the first frame update
@@ -32,9 +32,12 @@ public class PlayerController : MonoBehaviour
     {
         //Vector3 _forward = _camera.transform.forward;
         //Vector3 _right = _camera.transform.right;
+        if(_isRebornTime == false)
+        {
+            PlayerJump();
+            MovePlayer();
+        }
 
-        jumpPlayer();
-        MovePlayer();
     }
 
     private void OnCollisionEnter(Collision collision)
@@ -59,7 +62,7 @@ public class PlayerController : MonoBehaviour
         }
     }
 
-    void jumpPlayer()
+    void PlayerJump()
     {
         if (Input.GetKeyDown(KeyCode.Space))
         {
@@ -93,8 +96,9 @@ public class PlayerController : MonoBehaviour
         float verticalInput = Input.GetAxis("Vertical");
         transform.rotation = Quaternion.LookRotation(new Vector3(Camera.main.transform.forward.x, 0, Camera.main.transform.forward.z));
 
-       transform.Translate(Project(_camera.transform.forward).normalized * _speed * Time.deltaTime * verticalInput, Space.World);
-       transform.Translate(Project(_camera.transform.right).normalized *  _speed * Time.deltaTime * horizontalInput, Space.World);
+
+        transform.Translate(Project(transform.forward).normalized * _speed * Time.deltaTime * verticalInput, Space.World);
+        transform.Translate(Project(transform.right).normalized *  _speed * Time.deltaTime * horizontalInput, Space.World);
     }
 
     public Vector3 Project (Vector3 _forward)
