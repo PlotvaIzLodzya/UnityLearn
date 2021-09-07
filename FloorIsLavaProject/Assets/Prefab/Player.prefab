@@ -507,12 +507,12 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 5712052300578407694}
-  m_LocalRotation: {x: 0.14082606, y: -0.000072151415, z: 0.00001027435, w: 0.99003434}
-  m_LocalPosition: {x: 0.0012909283, y: 5.4671335, z: -9.738524}
+  m_LocalRotation: {x: 0.13157855, y: -0.0013192296, z: 0.00017510355, w: 0.9913049}
+  m_LocalPosition: {x: 0.039389353, y: 8.800547, z: -16.278206}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 5712052301500400965}
-  m_RootOrder: 0
+  m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 15.4, y: 0, z: 0}
 --- !u!20 &5712052300578407691
 Camera:
@@ -770,7 +770,7 @@ Transform:
   - {fileID: 5712052301133877337}
   - {fileID: 5712052300583456598}
   m_Father: {fileID: 5712052301500400965}
-  m_RootOrder: 1
+  m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!95 &5712052300588326906
 Animator:
@@ -1312,8 +1312,8 @@ Transform:
   m_LocalPosition: {x: -5, y: 4, z: 6.5}
   m_LocalScale: {x: 0.55, y: 0.5, z: 0.5}
   m_Children:
-  - {fileID: 5712052300578407695}
   - {fileID: 5712052300588326905}
+  - {fileID: 5712052300578407695}
   - {fileID: 5712052300513884068}
   m_Father: {fileID: 0}
   m_RootOrder: 0
@@ -1340,8 +1340,10 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _speed: 4
   jumpForce: 450
+  _camera1: {fileID: 0}
   _camera: {fileID: 5712052300578407691}
   maxJumpAmount: 2
+  _isRebornTime: 0
 --- !u!54 &5712052301500400966
 Rigidbody:
   m_ObjectHideFlags: 0
