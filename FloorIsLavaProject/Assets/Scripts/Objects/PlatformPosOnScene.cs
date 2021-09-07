@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class PositionOnScene : MonoBehaviour
+public class PlatformPosOnScene : MonoBehaviour
 {
     public Vector3 GetPos()
     {

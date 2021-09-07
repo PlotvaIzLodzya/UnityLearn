@@ -6,16 +6,14 @@ using UnityEngine;
 
 public class SpawnManager : MonoBehaviour
 {
-    public GameObject powerUp;
-    public GameObject platform;
+    [SerializeField] GameObject powerUp;
+    [SerializeField] GameObject platform;
     [SerializeField] private SpawnItems _spawnItems;
     [SerializeField] private SpawnObstacle _spawnObstacle;
     [SerializeField] private LvlGenerator _lvlGenerator;
     [SerializeField] private GameObject _lavaFloor;
-    public GameObject exitKey;
+    [SerializeField] GameObject exitKey;
     private GameManager _gameManager;
-
-    public GameObject[] _decorations;
 
     private Vector3 _lavaStartPos = new Vector3(-20, 0, -20);
     private int _lavaStartAreaOffset = 5;
@@ -36,22 +34,22 @@ public class SpawnManager : MonoBehaviour
     }
     public void LevelCreation()
     {
-        _gameManager.lengthPlatformAmount = _gameManager.levelCounter * _gameManager._platformAmountPerLvl;
-        _lvlGenerator.LevelObjectGeneration(platform,
+        _gameManager.lengthPlatformAmount = _gameManager.levelCounter * _gameManager.platformAmountPerLvl;
+        _lvlGenerator.LevelObjectPlacing(platform,
                       _platformStartPos,
                       _distance,
                       _gameManager.lengthPlatformAmount, _gameManager.widthPlatformAmount);
 
-        _lvlGenerator.LevelObjectGeneration(_lavaFloor,
+        _lvlGenerator.LevelObjectPlacing(_lavaFloor,
                       _lavaStartPos,
                       _distance,
                       _gameManager.lengthPlatformAmount + _lavaStartAreaOffset,
                       _widthLavaAmount);
 
         for (int i = 0; i < _gameManager.maxExitKeyAmount; i++)
-            _spawnItems.ObjectRandomSpawnOnPillar(exitKey, 2);
+            _spawnItems.ObjectRandomSpawnOnPlatform(exitKey, 2);
 
-        _spawnItems.ObjectRandomSpawnOnPillar(powerUp, 3);
+        _spawnItems.ObjectRandomSpawnOnPlatform(powerUp, 3);
 
         _lvlGenerator.LevelBordersPlacing(_cloudsLeftSide, _gameManager.lengthPlatformAmount);
         _lvlGenerator.LevelBordersPlacing(_cloudsRightSide, _gameManager.lengthPlatformAmount);

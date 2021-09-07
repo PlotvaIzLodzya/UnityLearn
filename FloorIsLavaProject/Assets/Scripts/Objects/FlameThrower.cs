@@ -2,20 +2,17 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class FlameThrower : MonoBehaviour
+public class FlameThrower : MovingCalculator
 {
     [SerializeField] private float _speed = 3.0f;
     private float leftMaxPos = 40.0f;
     [SerializeField] private float _rotationSpeed;
     [SerializeField] private ParticleSystem[] _particales;
-    private UtilityScripts _utility;
     private GameManager _gameManager;
-    public ObstacleCatalog _throwerName;
+    public ObstacleCatalog throwerName;
     // Start is called before the first frame update
     void Start()
     {
-        _utility = GetComponent<UtilityScripts>();
-
         foreach (ParticleSystem particle in _particales)
             particle.Play();
             
@@ -25,7 +22,7 @@ public class FlameThrower : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        _utility.MovingForwardInWorld(_speed);
+        MovingForwardInWorld(_speed);
         DestroyOutOfBounds();
         transform.Rotate(Vector3.right * _rotationSpeed * Time.deltaTime);
     }

@@ -2,9 +2,8 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Towers : MonoBehaviour
+public class Towers : MovingCalculator
 {
-    private UtilityScripts _utility;
     [SerializeField] AnimationCurve _animation;
     [SerializeField] float _duration;
     [SerializeField] float _distance;
@@ -14,7 +13,6 @@ public class Towers : MonoBehaviour
     void Start()
     {
         _initialPos = transform.position;
-        _utility = GetComponent<UtilityScripts>();
         _animation.preWrapMode = WrapMode.PingPong;
         _animation.postWrapMode = WrapMode.PingPong;
     }
@@ -22,6 +20,6 @@ public class Towers : MonoBehaviour
         // Update is called once per frame
         void Update()
     {
-        _utility.Levitation(_animation, _initialPos, _duration, _distance);
+        Levitation(_animation, _initialPos, _duration, _distance);
     }
 }

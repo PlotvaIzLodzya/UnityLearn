@@ -8,8 +8,9 @@ public class GameManager : MonoBehaviour
     
     [SerializeField] GameObject _player;
     public GameObject rebornPos;
-    public CinemachineFreeLook _camera;
+    [SerializeField] CinemachineFreeLook _camera;
     [SerializeField] ParticleSystem _rebornParticle;
+    [SerializeField] ParticleSystem _diyngParticle;
     private GameObject[] platforms;
     private SpawnManager _spawnManager;
     private GameObject powerUp;
@@ -22,7 +23,7 @@ public class GameManager : MonoBehaviour
 
     public int lengthPlatformAmount;
     public int widthPlatformAmount;
-    public int _platformAmountPerLvl = 5;
+    public int platformAmountPerLvl = 5;
 
     [SerializeField] private int _maxDuration = 6;
     [SerializeField] private int _minDuration = 3;
@@ -60,16 +61,12 @@ public class GameManager : MonoBehaviour
     }
 
     public void PlayerReborn()
-    {
+    {   
         _rebornParticle.Play();
-        StartCoroutine(RebornTime());
+        StartCoroutine(PlayerRebirth());
         Vector3 _cameraOffset = new Vector3(5, 0, 0);
-        _player.GetComponent<Rigidbody>().velocity = Vector3.zero;
-        _player.transform.position = rebornPos.transform.position;
-        _player.transform.rotation = Quaternion.Euler(new Vector3(0, 90.0f, 0));
         _camera.ForceCameraPosition(rebornPos.transform.position - _cameraOffset, Quaternion.Euler(Vector3.zero));
-        _camera.m_YAxis.Value = 0.5f;
-
+        _camera.m_YAxis.Value = 1.0f;
     }
 
     private void DestroyingWorld()
@@ -116,10 +113,14 @@ public class GameManager : MonoBehaviour
         }
     }
 
-    private IEnumerator RebornTime()
+    private IEnumerator PlayerRebirth()
     {
-        _player.GetComponent<PlayerController>()._isRebornTime = true;
+        _player.GetComponent<PlayerControlls>().isPlayerReborning = true;
+        _player.GetComponent<Rigidbody>().velocity = Vector3.zero;
+        _player.transform.position = rebornPos.transform.position;
+        _player.transform.rotation = Quaternion.Euler(new Vector3(0, 90.0f, 0));
         yield return new WaitForSeconds(2.1f);
-        _player.GetComponent<PlayerController>()._isRebornTime = false;
+
+        _player.GetComponent<PlayerControlls>().isPlayerReborning = false;
     }
 }

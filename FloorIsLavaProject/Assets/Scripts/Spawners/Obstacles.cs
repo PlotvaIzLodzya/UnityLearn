@@ -8,7 +8,3 @@ public enum ObstacleCatalog
     TwoWayThrower,
     TwoWayThrowerShuriken
 }
-public class Obstacles : MonoBehaviour
-{
-
-}
