@@ -7,6 +7,7 @@ public class PlayerMovement : MonoBehaviour
     private int jumpCounter = 0;
     private bool isGrounded;
     private int _maxJumpAmount = 2;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -19,7 +20,7 @@ public class PlayerMovement : MonoBehaviour
         
     }
 
-    public void MovePlayer( float _speed, float verticalInput, float horizontalInput)
+    public void MovePlayer(float _speed, float verticalInput, float horizontalInput)
     {
         transform.rotation = Quaternion.LookRotation(new Vector3(Camera.main.transform.forward.x, 0, Camera.main.transform.forward.z));
 

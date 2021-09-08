@@ -10,9 +10,8 @@ public class GameManager : MonoBehaviour
     public GameObject rebornPos;
     [SerializeField] CinemachineFreeLook _camera;
     [SerializeField] ParticleSystem _rebornParticle;
-    [SerializeField] ParticleSystem _diyngParticle;
     private GameObject[] platforms;
-    private SpawnManager _spawnManager;
+    private LevelConstructor _spawnManager;
     private GameObject powerUp;
     [SerializeField] float _yPosDestroyBounds = -350;
 
@@ -21,10 +20,6 @@ public class GameManager : MonoBehaviour
     public int maxExitKeyAmount = 1;
     public int levelCounter = 1 ;
 
-    public int lengthPlatformAmount;
-    public int widthPlatformAmount;
-    public int platformAmountPerLvl = 5;
-
     [SerializeField] private int _maxDuration = 6;
     [SerializeField] private int _minDuration = 3;
 
@@ -32,7 +27,7 @@ public class GameManager : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        _spawnManager = FindObjectOfType<SpawnManager>().GetComponent<SpawnManager>();
+        _spawnManager = FindObjectOfType<LevelConstructor>().GetComponent<LevelConstructor>();
         _spawnManager.LevelCreation();
         _player = GameObject.Find("Player");
         
@@ -99,7 +94,7 @@ public class GameManager : MonoBehaviour
         {
             maxExitKeyAmount++;
         }
-        if(levelCounter > 5)
+        if(levelCounter == 5)
         {
             maxExitKeyAmount = 3;
         }

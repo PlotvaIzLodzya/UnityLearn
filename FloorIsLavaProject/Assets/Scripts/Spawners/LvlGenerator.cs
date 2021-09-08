@@ -20,9 +20,9 @@ public class LvlGenerator : MonoBehaviour
             }
         }
     }
-    public void LevelBordersPlacing(Vector3 _startPos, int _length)
+    public void LevelBordersPlacing( Vector3 _startPos, int _xObjectAmount)
     {
-        for (int _xPos = 1; _xPos <= _length; _xPos++)
+        for (int _xPos = 1; _xPos <= _xObjectAmount; _xPos++)
         {
             int index = DecorChooser();
             Instantiate(_decorations[index],

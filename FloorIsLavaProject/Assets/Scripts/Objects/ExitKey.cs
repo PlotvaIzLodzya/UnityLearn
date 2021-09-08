@@ -4,14 +4,18 @@ using UnityEngine;
 
 public class ExitKey : MonoBehaviour
 {
-    
+    private GameManager _gameManager;
+    private void Start()
+    {
+        _gameManager = FindObjectOfType<GameManager>().GetComponent<GameManager>();
+    }
+
     private void OnTriggerEnter(Collider other)
     {
         if (other.CompareTag("Player"))
         {
-            FindObjectOfType<GameManager>().GetComponent<GameManager>().exitKeyCounter++;
+            _gameManager.exitKeyCounter++;
             Destroy(gameObject);
-            Debug.Log("exit key counter: " + FindObjectOfType<GameManager>().GetComponent<GameManager>().exitKeyCounter);
         }
     }
 }

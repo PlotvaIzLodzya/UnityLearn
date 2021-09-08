@@ -4,15 +4,15 @@ using UnityEngine;
 
 
 
-public class SpawnManager : MonoBehaviour
+public class LevelConstructor : MonoBehaviour
 {
-    [SerializeField] GameObject powerUp;
-    [SerializeField] GameObject platform;
+    [SerializeField] private GameObject powerUp;
+    [SerializeField] private GameObject exitKey;
+    [SerializeField] private GameObject platform;
     [SerializeField] private SpawnItems _spawnItems;
     [SerializeField] private SpawnObstacle _spawnObstacle;
-    [SerializeField] private LvlGenerator _lvlGenerator;
     [SerializeField] private GameObject _lavaFloor;
-    [SerializeField] GameObject exitKey;
+    [SerializeField] private LvlGenerator _lvlGenerator;
     private GameManager _gameManager;
 
     private Vector3 _lavaStartPos = new Vector3(-20, 0, -20);
@@ -25,34 +25,39 @@ public class SpawnManager : MonoBehaviour
     private float _distance = 4;
     public int ObstaclesAmount;
 
+    public int lengthPlatformAmount;
+    public int widthPlatformAmount;
+    public int platformAmountPerLvl = 5;
+
     // Start is called before the first frame update
     void Start()
     {
         _gameManager = FindObjectOfType<GameManager>().GetComponent<GameManager>();
         _spawnObstacle = GetComponent<SpawnObstacle>();
-        ObstaclesAmount = _gameManager.lengthPlatformAmount / 5;
+        ObstaclesAmount = lengthPlatformAmount / 5;
     }
     public void LevelCreation()
     {
-        _gameManager.lengthPlatformAmount = _gameManager.levelCounter * _gameManager.platformAmountPerLvl;
+        lengthPlatformAmount = _gameManager.levelCounter * platformAmountPerLvl;
+
         _lvlGenerator.LevelObjectPlacing(platform,
-                      _platformStartPos,
-                      _distance,
-                      _gameManager.lengthPlatformAmount, _gameManager.widthPlatformAmount);
+                                         _platformStartPos,
+                                         _distance,
+                                         lengthPlatformAmount, widthPlatformAmount);
 
         _lvlGenerator.LevelObjectPlacing(_lavaFloor,
-                      _lavaStartPos,
-                      _distance,
-                      _gameManager.lengthPlatformAmount + _lavaStartAreaOffset,
-                      _widthLavaAmount);
+                                         _lavaStartPos,
+                                         _distance,
+                                         lengthPlatformAmount + _lavaStartAreaOffset,
+                                         _widthLavaAmount);
 
         for (int i = 0; i < _gameManager.maxExitKeyAmount; i++)
             _spawnItems.ObjectRandomSpawnOnPlatform(exitKey, 2);
 
         _spawnItems.ObjectRandomSpawnOnPlatform(powerUp, 3);
 
-        _lvlGenerator.LevelBordersPlacing(_cloudsLeftSide, _gameManager.lengthPlatformAmount);
-        _lvlGenerator.LevelBordersPlacing(_cloudsRightSide, _gameManager.lengthPlatformAmount);
+        _lvlGenerator.LevelBordersPlacing(_cloudsLeftSide, lengthPlatformAmount);
+        _lvlGenerator.LevelBordersPlacing(_cloudsRightSide, lengthPlatformAmount);
 
         StartCoroutine(_spawnObstacle.SpawnThrower(ObstacleCatalog.OneWayThrower));
 

@@ -6,9 +6,11 @@ using Cinemachine;
 public class PlayerControlls : PlayerMovement
 {
     [SerializeField] float _speed = 5;
-    [SerializeField] float _jumpForce = 490 ;
+    [SerializeField] float _jumpForce = 490;
     private Rigidbody _playerRb;
     [SerializeField] int _maxJumpAmount1;
+    [SerializeField] GameObject _player;
+
 
     private int gravityModifier = 4;
 
@@ -26,17 +28,17 @@ public class PlayerControlls : PlayerMovement
     // Update is called once per frame
     void Update()
     {
-        if(isPlayerReborning == false)
+        if (isPlayerReborning == false)
         {
             float horizontalInput = Input.GetAxis("Horizontal");
             float verticalInput = Input.GetAxis("Vertical");
             MovePlayer(_speed, verticalInput, horizontalInput);
-        }
 
-        if (Input.GetKeyDown(KeyCode.Space))
-        {
-            PlayerJump(_playerRb, _jumpForce);
+            if (Input.GetKeyDown(KeyCode.Space))
+            {
+                PlayerJump(_playerRb, _jumpForce);
+            }
+
         }
     }
-
 }

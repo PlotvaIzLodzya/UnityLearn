@@ -22,9 +22,8 @@ public class DyingSun : MovingCalculator
     void Update()
     {
         _lightSource.intensity = AnimationCalculator(_lightIntensity, _duration, _particlesStartPoint);
+
         if (_lightSource.intensity >= _particlesStartPoint)
-        {
             _sunParticles.Play();
-        }
     }
 }

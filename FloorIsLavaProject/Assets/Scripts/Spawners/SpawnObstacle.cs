@@ -5,7 +5,7 @@ using UnityEngine;
 public class SpawnObstacle : MonoBehaviour
 {
     GameManager _gameManager;
-    SpawnManager _spawnManager;
+    LevelConstructor _spawnManager;
     float _distance = 4.0f;
     float _flameThrowerOffset = 2.0f;
     [SerializeField] GameObject[] throwers;
@@ -13,7 +13,7 @@ public class SpawnObstacle : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        _spawnManager = FindObjectOfType<SpawnManager>().GetComponent<SpawnManager>();
+        _spawnManager = FindObjectOfType<LevelConstructor>().GetComponent<LevelConstructor>();
         _gameManager = FindObjectOfType<GameManager>().GetComponent<GameManager>();
     }
 
@@ -35,7 +35,7 @@ public class SpawnObstacle : MonoBehaviour
     {
         for (int i = 0; i < _spawnManager.ObstaclesAmount; i++)
         {
-            float posX = Random.Range(2, _gameManager.lengthPlatformAmount) * _distance - _flameThrowerOffset;
+            float posX = Random.Range(2, _spawnManager.lengthPlatformAmount) * _distance - _flameThrowerOffset;
             float posZ = -15.0f;
             Vector3 _flameThrowerPos = new Vector3(posX, throwers[ThrowerPicker(_thrower)].transform.position.y, posZ);
 

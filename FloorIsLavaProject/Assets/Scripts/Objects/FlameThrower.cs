@@ -27,11 +27,12 @@ public class FlameThrower : MovingCalculator
         transform.Rotate(Vector3.right * _rotationSpeed * Time.deltaTime);
     }
 
-        private void DestroyOutOfBounds()
-        {
-            if(transform.position.z > leftMaxPos)
-                Destroy(gameObject);
-        }
+    private void DestroyOutOfBounds()
+    {
+        if(transform.position.z > leftMaxPos)
+            Destroy(gameObject);
+    }
+
     private void OnTriggerEnter(Collider other)
     {
         if (other.CompareTag("Player"))
