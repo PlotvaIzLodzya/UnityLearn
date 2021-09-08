@@ -2,23 +2,16 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public enum SpawnAreaCatalog
-{
-    NoArea,
-    CarSpawnArea,
-    RightSpawnArea,
-    LeftSpawnArea,
-    
-}
+
 public class BackgroundSpawns : MonoBehaviour
 {
     private GameManager _gameManagerScript;
     [SerializeField] GameObject[] _spawnAreas;
     [SerializeField] GameObject[] _cititzenPrefabs;
     [SerializeField] GameObject[] _carPrefabs;
-   
-    private float minSpawnTime = 1;
-    private float maxSpawnTime = 5;
+
+    [SerializeField]private float minSpawnTime = 1;
+    [SerializeField]private float maxSpawnTime = 5;
 
     // Start is called before the first frame update
     void Start()
@@ -29,11 +22,6 @@ public class BackgroundSpawns : MonoBehaviour
         StartCoroutine(BackSceneRuler(_cititzenPrefabs, GetArea(SpawnAreaCatalog.LeftSpawnArea), 0));
     }
 
-    // Update is called once per frame
-    void Update()
-    {
-            
-    }
 
     public GameObject GetArea(SpawnAreaCatalog spawnAreaId)
     { 

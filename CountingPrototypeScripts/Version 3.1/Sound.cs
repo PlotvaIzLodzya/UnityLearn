@@ -17,12 +17,6 @@ public class Sound : MonoBehaviour
         audioSource = GameObject.Find("Main Camera").GetComponent<AudioSource>();
     }
 
-    // Update is called once per frame
-    void Update()
-    {
-        
-    }
-
     public void playSound(AudioClip sound, float soundLevel)
     {
         audioSource.PlayOneShot(sound, soundLevel);

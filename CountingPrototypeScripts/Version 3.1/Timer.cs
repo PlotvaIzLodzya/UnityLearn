@@ -10,7 +10,6 @@ public class Timer : MonoBehaviour
     void Start()
     {
         _gameManagerScript = FindObjectOfType<GameManager>().GetComponent<GameManager>();
-
     }
 
     // Update is called once per frame

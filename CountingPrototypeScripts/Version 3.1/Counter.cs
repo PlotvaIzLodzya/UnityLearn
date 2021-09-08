@@ -18,7 +18,6 @@ public class Counter : MonoBehaviour
     {
         _gameManagerScript = FindObjectOfType<GameManager>().GetComponent<GameManager>();
         _soundManager = FindObjectOfType<Sound>();
-
         _trashcanTrigger = GetComponent<BoxCollider>();
         _trashcanTriggerSize = _trashcanTrigger.bounds.size;
         _trashCanCenter = _trashcanTrigger.bounds.center;
@@ -34,6 +33,7 @@ public class Counter : MonoBehaviour
         _trashcan = Physics.OverlapBox(_trashCanCenter, _trashcanTriggerSize / 2.0f);
         _gameManagerScript._count = _trashcan.Length-1;
     }
+
     private void OnTriggerEnter(Collider other)
     {
         _soundManager.playSound(_soundManager._counted,Math.Min(_trashcan.Length, _soundManager.maxCountedSoundLevel));

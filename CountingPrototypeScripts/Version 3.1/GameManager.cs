@@ -53,12 +53,12 @@ public class GameManager : MonoBehaviour
     public Vector3 RandomSpawnPosInBoxCollider(GameObject _spawnArea)
     {
         Vector3 center = _spawnArea.transform.position;
-        float halfSizeX = _spawnArea.GetComponent<BoxCollider>().size.x * _spawnArea.transform.localScale.x / 2;
-        float halfSizeZ = _spawnArea.GetComponent<BoxCollider>().size.z * _spawnArea.transform.localScale.z / 2;
-        float halfSizeY = _spawnArea.GetComponent<BoxCollider>().size.y * _spawnArea.transform.localScale.y / 2;
+        float halfSizeX = _spawnArea.GetComponent<BoxCollider>().bounds.extents.x;
+        float halfSizeY = _spawnArea.GetComponent<BoxCollider>().bounds.extents.y;
+        float halfSizeZ = _spawnArea.GetComponent<BoxCollider>().bounds.extents.z;
         float posX = Random.Range(-halfSizeX, halfSizeX);
-        float posZ = Random.Range(-halfSizeZ, halfSizeZ);
         float posY = Random.Range(-halfSizeY, halfSizeY);
+        float posZ = Random.Range(-halfSizeZ, halfSizeZ);
         Vector3 objectPos = new Vector3(posX, posY, posZ);
         return objectPos + center;
     }
@@ -92,15 +92,14 @@ public class GameManager : MonoBehaviour
             _bestTime = _currentLevelTimeComplition;
             _interfaceScript.BestTimeSetting(_bestTime);
         }
-
     }
 
     public void isPreparationTimeActive(bool isActive)
     {
         isPreparationTime = isActive;
         _interfaceScript.PreparationOnScreen(isActive);
-
     }
+
     public void StartNewLevel()
     {
         isPreparationTimeActive(true);

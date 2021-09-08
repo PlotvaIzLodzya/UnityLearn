@@ -34,8 +34,7 @@ public class Objects : MonoBehaviour
         if (_gameManagerScript.isPreparationTime == false && _isDragged)
         {
             _screenPoint = Camera.main.WorldToScreenPoint(gameObject.transform.position);
-            gameObject.transform.position = new Vector3(0, transform.position.y, transform.position.z);
-            Vector3 forceDirection = Camera.main.ScreenToWorldPoint(new Vector3(Input.mousePosition.x, Input.mousePosition.y, _screenPoint.z)) - transform.position;
+            Vector3 forceDirection = Camera.main.ScreenToWorldPoint(new Vector3(Input.mousePosition.x, Input.mousePosition.y, Camera.main.transform.position.x)) - transform.position;
 
             _objectRigidbody.AddForce(forceDirection * _gameManagerScript._forceMultiplier, ForceMode.Force);
         }
