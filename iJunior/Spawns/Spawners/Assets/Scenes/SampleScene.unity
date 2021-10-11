@@ -454,13 +454,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b1d447f670eccc6448bcc0d0cec1b4eb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _spawners:
-  - {fileID: 1107905617}
-  - {fileID: 275335031}
-  - {fileID: 1047733093}
+  _spawnPoint:
+  - {x: 4, y: 5, z: 0}
+  - {x: -6, y: 5, z: 0}
+  - {x: 0, y: 5, z: 0}
   _enemys:
   - {fileID: 7459917944645097011, guid: ef11607cc1d332f4d97f3f87a4c520a0, type: 3}
   - {fileID: 8192563435400062321, guid: 31d3a7f28ccf5394380877ffc59e9260, type: 3}
+  _spawnCooldown: 2
   _isGameActive: 1
 --- !u!4 &1000028249
 Transform:
@@ -532,7 +533,7 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1107905617}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalRotation: {x: -0.05460164, y: 0, z: 0, w: 0.9985082}
   m_LocalPosition: {x: 4.74, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
