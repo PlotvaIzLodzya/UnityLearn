@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class Spawner : MonoBehaviour
 {
-    [SerializeField] private List<GameObject> _spawners;
+    [SerializeField] private List<Vector3> _spawners;
     [SerializeField] private List<GameObject> _enemys;
     [SerializeField] private WaitForSeconds _spawnRate = new WaitForSeconds(2);
     [SerializeField] private bool _isGameActive = true;
@@ -21,7 +21,7 @@ public class Spawner : MonoBehaviour
         {
             int enemyIndex = Random.Range(0, _enemys.Count);
             int spawnerIndex = Random.Range(0, _spawners.Count);
-            Instantiate(_enemys[enemyIndex], _spawners[spawnerIndex].transform.position, Quaternion.identity);
+            Instantiate(_enemys[enemyIndex], _spawners[spawnerIndex], Quaternion.identity);
             yield return _spawnRate;
         }
     }
