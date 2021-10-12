@@ -11,7 +11,7 @@ public class Enemy : MonoBehaviour
     [SerializeField] private GameObject _pathPoint;
     [SerializeField] private Rigidbody2D _rigidBody;
 
-    void Start()
+    private void Start()
     {
         _rigidBody = GetComponent<Rigidbody2D>();
         _collider = GetComponent<BoxCollider2D>();

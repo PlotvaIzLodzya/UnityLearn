@@ -5,10 +5,10 @@ using UnityEngine;
 public class Spawner : MonoBehaviour
 {
 
+    private WaitForSeconds _spawnRate;
+    [SerializeField] private float _spawnCooldown = 2;
     [SerializeField] private List<Transform> _spawnPoints;
     [SerializeField] private List<GameObject> _enemys;
-    [SerializeField] private WaitForSeconds _spawnRate;
-    [SerializeField] private float _spawnCooldown = 2;
     [SerializeField] private bool _isGameActive = true;
 
     private void Start()
