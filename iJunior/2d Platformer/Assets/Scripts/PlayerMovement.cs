@@ -13,14 +13,13 @@ public class PlayerMovement : MonoBehaviour
     private Animator _animator;
     private Rigidbody2D _playerRigidBody;
 
-    void Start()
+    private void Start()
     {
         _animator = GetComponent<Animator>();
         _playerRigidBody = GetComponent<Rigidbody2D>();
     }
 
-    // Update is called once per frame
-    void LateUpdate()
+    private void LateUpdate()
     {
         float xAxis = Input.GetAxis("Horizontal");
         transform.Translate(Vector2.right * Time.deltaTime * _speed * Mathf.Abs(xAxis));
@@ -31,7 +30,7 @@ public class PlayerMovement : MonoBehaviour
             _isGrounded = false;
         }
 
-        _animator.SetFloat("speed", Mathf.Abs(xAxis));
+        _animator.SetFloat(AnimatorPlayerController.Params.Speed, Mathf.Abs(xAxis));;
 
         if (xAxis > 0 && _isFacingRight)
         {

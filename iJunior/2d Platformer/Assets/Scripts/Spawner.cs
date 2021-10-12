@@ -4,19 +4,19 @@ using UnityEngine;
 
 public class Spawner : MonoBehaviour
 {
-    [SerializeField] private List<GameObject> _spawners;
+    [SerializeField] private List<Transform> _spawnPoint;
     [SerializeField] private Coin _coin;
     [SerializeField] private Coin _coinOnScene;
 
     private void Update()
     {
         if (_coinOnScene == null) 
-            SpawnEnemys();
+            SpawnCoin();
     }
 
-    private void SpawnEnemys()
+    private void SpawnCoin()
     {
-        int spawnerIndex = Random.Range(0, _spawners.Count);
-        _coinOnScene = Instantiate(_coin, _spawners[spawnerIndex].transform.position, Quaternion.identity);
+        int spawnIndex = Random.Range(0, _spawnPoint.Count);
+        _coinOnScene = Instantiate(_coin, _spawnPoint[spawnIndex].position, Quaternion.identity);
     }
 }

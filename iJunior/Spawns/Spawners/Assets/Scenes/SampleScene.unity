@@ -455,9 +455,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _spawnPoint:
-  - {x: 4, y: 5, z: 0}
-  - {x: -6, y: 5, z: 0}
-  - {x: 0, y: 5, z: 0}
+  - {fileID: 1107905619}
+  - {fileID: 275335033}
+  - {fileID: 1047733095}
   _enemys:
   - {fileID: 7459917944645097011, guid: ef11607cc1d332f4d97f3f87a4c520a0, type: 3}
   - {fileID: 8192563435400062321, guid: 31d3a7f28ccf5394380877ffc59e9260, type: 3}

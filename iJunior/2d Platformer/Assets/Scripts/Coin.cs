@@ -8,7 +8,6 @@ public class Coin : MonoBehaviour
     {
         if(collision.TryGetComponent(out Player player))
         {
-            player.CollectCoin();
             Destroy(gameObject);
         }
     }

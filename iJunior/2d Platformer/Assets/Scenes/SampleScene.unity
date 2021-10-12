@@ -354,7 +354,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _speed: 5
-  _jumpForce: 7
+  _jumpForce: 1200
   _isGrounded: 0
   _isFacingRight: 0
 --- !u!50 &396399017
@@ -369,10 +369,10 @@ Rigidbody2D:
   m_Simulated: 1
   m_UseFullKinematicContacts: 0
   m_UseAutoMass: 0
-  m_Mass: 1
+  m_Mass: 50
   m_LinearDrag: 0
   m_AngularDrag: 0.05
-  m_GravityScale: 1
+  m_GravityScale: 9.81
   m_Material: {fileID: 6200000, guid: 36dc138429c76d6438c32560db1dcc7d, type: 2}
   m_Interpolate: 0
   m_SleepingMode: 1
@@ -551,15 +551,15 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 24f95718141462e49a6de2d652ecd757, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _spawners:
-  - {fileID: 1363146153}
-  - {fileID: 1693267598}
-  - {fileID: 276386447}
-  - {fileID: 88643399}
-  - {fileID: 1934684545}
-  - {fileID: 1111713269}
-  - {fileID: 885550707}
-  - {fileID: 165451344}
+  _spawnPoint:
+  - {fileID: 1363146154}
+  - {fileID: 1693267599}
+  - {fileID: 276386448}
+  - {fileID: 88643400}
+  - {fileID: 1934684546}
+  - {fileID: 1111713270}
+  - {fileID: 885550708}
+  - {fileID: 165451345}
   _coin: {fileID: 8271422604813652721, guid: 3612b894d3807f44582407467178362d, type: 3}
   _coinOnScene: {fileID: 0}
 --- !u!1 &519420028
