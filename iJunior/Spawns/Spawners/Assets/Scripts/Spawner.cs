@@ -24,6 +24,7 @@ public class Spawner : MonoBehaviour
             int enemyIndex = Random.Range(0, _enemys.Count);
             int spawnerIndex = Random.Range(0, _spawnPoint.Count);
             Instantiate(_enemys[enemyIndex], _spawnPoint[spawnerIndex].position, Quaternion.identity);
+
             yield return _spawnRate;
         }
     }
