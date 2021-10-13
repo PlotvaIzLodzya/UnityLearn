@@ -4,19 +4,17 @@ using UnityEngine;
 
 public class Player : MonoBehaviour
 {
-    [SerializeField] private float _healAmount = 10;
-    [SerializeField] private float _damageAmount = 10;
     [SerializeField] private Health _health;
 
-    public void GetHeal()
+    public void GetHeal(float healAmount)
     {
-        StartCoroutine(_health.Change(_healAmount));
+        StartCoroutine(_health.Change(healAmount));
     }
 
 
-    public void GetDamage()
+    public void GetDamage(float damageAmount)
     {
-        StartCoroutine(_health.Change(-_damageAmount));
+        StartCoroutine(_health.Change(-damageAmount));
     }
 
 
