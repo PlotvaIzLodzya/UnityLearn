@@ -9,8 +9,6 @@ public class HealthSlider : MonoBehaviour
     private float _smoothing = 10f;
     [SerializeField] private Player _player;
 
-    private bool _isEqual => _player.Health.CurrentValue == _healthBar.value;
-
     private void Start()
     {
         _healthBar = GetComponent<Slider>();
@@ -19,7 +17,7 @@ public class HealthSlider : MonoBehaviour
 
     private void Update()
     {
-        if (_isEqual == false)
+        if (_player.Health.CurrentValue != _healthBar.value)
             _healthBar.value = Mathf.MoveTowards(_healthBar.value, _player.Health.CurrentValue, _smoothing * Time.deltaTime);
     }
 }
