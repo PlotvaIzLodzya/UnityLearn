@@ -9,19 +9,17 @@ public class HealthSlider : MonoBehaviour
     private float _smoothing = 10f;
     [SerializeField] private Player _player;
 
-    private float _currentValue => _player.Health.CurrentValue;
-    private float _maxHealth => _player.Health.MaxValue;
-    private bool _isEqual => _currentValue == _healthBar.value;
+    private bool _isEqual => _player.Health.CurrentValue == _healthBar.value;
 
     private void Start()
     {
         _healthBar = GetComponent<Slider>();
-        _healthBar.maxValue = _maxHealth;
+        _healthBar.maxValue = _player.Health.MaxValue;
     }
 
     private void Update()
     {
         if (_isEqual == false)
-            _healthBar.value = Mathf.MoveTowards(_healthBar.value, _currentValue, _smoothing * Time.deltaTime);
+            _healthBar.value = Mathf.MoveTowards(_healthBar.value, _player.Health.CurrentValue, _smoothing * Time.deltaTime);
     }
 }
