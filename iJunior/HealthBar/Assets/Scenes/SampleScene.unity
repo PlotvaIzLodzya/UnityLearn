@@ -618,7 +618,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7e75b1978b6c67e41bfab890994f3e59, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _slider: {fileID: 2131322995}
+  _currentValue: 0
 --- !u!114 &750627139
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -631,7 +631,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 21350dd9aad51d5449c70f2084a6991d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _health: {fileID: 750627138}
+  Health: {fileID: 750627138}
 --- !u!136 &750627140
 CapsuleCollider:
   m_ObjectHideFlags: 0
@@ -1730,6 +1730,7 @@ GameObject:
   m_Component:
   - component: {fileID: 2131322996}
   - component: {fileID: 2131322995}
+  - component: {fileID: 2131322997}
   m_Layer: 5
   m_Name: Slider
   m_TagString: Untagged
@@ -1810,3 +1811,16 @@ RectTransform:
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 160, y: 20}
   m_Pivot: {x: 0.5, y: 0.5}
+--- !u!114 &2131322997
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2131322994}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: bab5b76adfa86954f98b950045df561a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _player: {fileID: 750627139}

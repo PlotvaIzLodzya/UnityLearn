@@ -8,11 +8,11 @@ public class Player : MonoBehaviour
 
     public void GetHeal(float healAmount)
     {
-        StartCoroutine(Health.Change(healAmount));
+        Health.Change(healAmount);
     }
 
     public void GetDamage(float damageAmount)
     {
-        StartCoroutine(Health.Change(-damageAmount));
+        Health.Change(-damageAmount);
     }
 }

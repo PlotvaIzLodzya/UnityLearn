@@ -6,7 +6,6 @@ public class Health : MonoBehaviour
 {
     private float _maxValue = 100f;
     private float _currentValue;
-    private float _duration = 0.7f;
 
     public float MaxValue
     {
@@ -22,16 +21,9 @@ public class Health : MonoBehaviour
         _currentValue = _maxValue;
     }
 
-    public IEnumerator Change(float changeValue)
+    public void Change(float value)
     {
-        float newValue = CurrentValue + changeValue;
-
-        for (float timePassed = 0; timePassed < _duration; timePassed += Time.deltaTime)
-        {
-            _currentValue = Mathf.MoveTowards(CurrentValue, newValue, timePassed / _duration);
-            yield return null;
-        }
-
-        _currentValue = Mathf.Clamp(CurrentValue, 0f, _maxValue);
+        _currentValue += value;
+        _currentValue = Mathf.Clamp(_currentValue, 0f, _maxValue);
     }
 }
