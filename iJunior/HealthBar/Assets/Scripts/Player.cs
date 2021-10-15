@@ -2,17 +2,24 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+[RequireComponent(typeof(Health))]
+
 public class Player : MonoBehaviour
 {
-    [SerializeField] public Health Health;
+    [SerializeField] private Health _health;
+
+    private void Start()
+    {
+        _health = GetComponent<Health>();
+    }
 
     public void GetHeal(float healAmount)
     {
-        Health.Change(healAmount);
+        _health.Change(healAmount);
     }
 
     public void GetDamage(float damageAmount)
     {
-        Health.Change(-damageAmount);
+        _health.Change(-damageAmount);
     }
 }

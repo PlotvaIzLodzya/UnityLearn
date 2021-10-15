@@ -5,16 +5,10 @@ using UnityEngine;
 public class Health : MonoBehaviour
 {
     private float _maxValue = 100f;
-    private float _currentValue;
+    [SerializeField] private float _currentValue;
 
-    public float MaxValue
-    {
-        get { return _maxValue; }
-    }
-    public float CurrentValue
-    {
-        get { return _currentValue; }
-    }
+    public float MaxValue => _maxValue;
+    public float CurrentValue => _currentValue;
 
     private void Start()
     {
