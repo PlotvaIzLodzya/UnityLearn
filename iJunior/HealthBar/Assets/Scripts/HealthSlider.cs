@@ -2,7 +2,6 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
-using UnityEngine.Events;
 
 [RequireComponent(typeof(Slider))]
 
@@ -20,9 +19,18 @@ public class HealthSlider : MonoBehaviour
         _healthBar.maxValue = _playerHealth.MaxValue;
     }
 
-    private void Update()
+    private IEnumerator ChangeValue()
     {
-        if (_healthBar.value != _playerHealth.CurrentValue)
+        while(_healthBar.value != _playerHealth.CurrentValue)
+        {
             _healthBar.value = Mathf.MoveTowards(_healthBar.value, _playerHealth.CurrentValue, _smoothing * Time.deltaTime);
+        
+            yield return new WaitForFixedUpdate();
+        }
+    }
+
+    public void StartChange()
+    {
+         StartCoroutine(ChangeValue());
     }
 }
