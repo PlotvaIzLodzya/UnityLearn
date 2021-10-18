@@ -6,12 +6,7 @@ using UnityEngine;
 
 public class Player : MonoBehaviour
 {
-    [SerializeField] private Health _health;
-
-    private void Start()
-    {
-        _health = GetComponent<Health>();
-    }
+    private Health _health;
 
     public void GetHeal(float healAmount)
     {
@@ -21,5 +16,10 @@ public class Player : MonoBehaviour
     public void GetDamage(float damageAmount)
     {
         _health.Change(-damageAmount);
+    }
+
+    private void Start()
+    {
+        _health = GetComponent<Health>();
     }
 }

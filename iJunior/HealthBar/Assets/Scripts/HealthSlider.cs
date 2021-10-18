@@ -7,16 +7,23 @@ using UnityEngine.UI;
 
 public class HealthSlider : MonoBehaviour
 {
-    private Slider _healthBar;
-    private float _smoothing = 10f;
     [SerializeField] private Player _player;
 
-    private Health _playerHealth => _player.GetComponent<Health>();
+    private Slider _healthBar;
+    private float _smoothing = 10f;
+    private Health _playerHealth;
 
     private void Start()
     {
         _healthBar = GetComponent<Slider>();
+        _playerHealth = _player.GetComponent<Health>();
+        _playerHealth.Changed += StartChangeCoroutine;
         _healthBar.maxValue = _playerHealth.MaxValue;
+    }
+
+    private void OnDisable()
+    {
+        _playerHealth.Changed -= StartChangeCoroutine;
     }
 
     private IEnumerator ChangeValue()
@@ -29,7 +36,7 @@ public class HealthSlider : MonoBehaviour
         }
     }
 
-    public void StartChangeCoroutine()
+    private void StartChangeCoroutine()
     {
          StartCoroutine(ChangeValue());
     }

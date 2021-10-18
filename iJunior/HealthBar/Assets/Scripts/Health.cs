@@ -5,22 +5,29 @@ using UnityEngine.Events;
 
 public class Health : MonoBehaviour
 {
-    private float _maxValue = 100f;
-    [SerializeField] private float _currentValue;
     [SerializeField] private UnityEvent _ñhanged;
+
+    private float _maxValue = 100f;
+    private float _currentValue;
 
     public float MaxValue => _maxValue;
     public float CurrentValue => _currentValue;
 
-    private void Start()
+    public event UnityAction Changed
     {
-        _currentValue = _maxValue;
+        add => _ñhanged.AddListener(value);
+        remove => _ñhanged.RemoveListener(value);
     }
 
     public void Change(float value)
     {
         _currentValue += value;
         _currentValue = Mathf.Clamp(_currentValue, 0f, _maxValue);
-        _ñhanged.Invoke();
+        _ñhanged?.Invoke();
+    }
+
+    private void Start()
+    {
+        _currentValue = _maxValue;
     }
 }
