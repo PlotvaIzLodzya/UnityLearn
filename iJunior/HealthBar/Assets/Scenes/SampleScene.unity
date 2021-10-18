@@ -624,7 +624,7 @@ MonoBehaviour:
       m_Calls:
       - m_Target: {fileID: 2131322997}
         m_TargetAssemblyTypeName: HealthSlider, Assembly-CSharp
-        m_MethodName: StartChange
+        m_MethodName: StartChangeCoroutine
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}

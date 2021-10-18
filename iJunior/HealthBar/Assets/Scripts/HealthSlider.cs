@@ -25,11 +25,11 @@ public class HealthSlider : MonoBehaviour
         {
             _healthBar.value = Mathf.MoveTowards(_healthBar.value, _playerHealth.CurrentValue, _smoothing * Time.deltaTime);
         
-            yield return new WaitForFixedUpdate();
+            yield return null;
         }
     }
 
-    public void StartChange()
+    public void StartChangeCoroutine()
     {
          StartCoroutine(ChangeValue());
     }
