@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using System;
 
 [RequireComponent(typeof(Slider))]
 
@@ -13,12 +14,12 @@ public class HealthSlider : MonoBehaviour
     private float _smoothing = 10f;
     private Health _playerHealth;
 
-    private void Start()
+    private void OnEnable()
     {
         _healthBar = GetComponent<Slider>();
         _playerHealth = _player.GetComponent<Health>();
-        _playerHealth.Changed += StartChangeCoroutine;
         _healthBar.maxValue = _playerHealth.MaxValue;
+        _playerHealth.Changed += StartChangeCoroutine;
     }
 
     private void OnDisable()

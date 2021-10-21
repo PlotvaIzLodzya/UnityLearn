@@ -2,32 +2,32 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Events;
+using System;
 
 public class Health : MonoBehaviour
 {
-    [SerializeField] private UnityEvent _ñhanged;
-
+    private event Action _changed;
     private float _maxValue = 100f;
     private float _currentValue;
+
+    public event Action Changed
+    {
+        add => _changed += value;
+        remove => _changed -= value;
+    }
 
     public float MaxValue => _maxValue;
     public float CurrentValue => _currentValue;
 
-    public event UnityAction Changed
+    private void Start()
     {
-        add => _ñhanged.AddListener(value);
-        remove => _ñhanged.RemoveListener(value);
+        _currentValue = _maxValue;
     }
-
+        
     public void Change(float value)
     {
         _currentValue += value;
         _currentValue = Mathf.Clamp(_currentValue, 0f, _maxValue);
-        _ñhanged?.Invoke();
-    }
-
-    private void Start()
-    {
-        _currentValue = _maxValue;
+        _changed?.Invoke();
     }
 }

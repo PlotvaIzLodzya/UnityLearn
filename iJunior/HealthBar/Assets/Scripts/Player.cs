@@ -8,6 +8,11 @@ public class Player : MonoBehaviour
 {
     private Health _health;
 
+    private void Start()
+    {
+        _health = GetComponent<Health>();
+    }
+
     public void GetHeal(float healAmount)
     {
         _health.Change(healAmount);
@@ -16,10 +21,5 @@ public class Player : MonoBehaviour
     public void GetDamage(float damageAmount)
     {
         _health.Change(-damageAmount);
-    }
-
-    private void Start()
-    {
-        _health = GetComponent<Health>();
     }
 }

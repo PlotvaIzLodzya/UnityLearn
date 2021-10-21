@@ -618,22 +618,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7e75b1978b6c67e41bfab890994f3e59, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _currentValue: 0
   "_\u0441hanged":
     m_PersistentCalls:
-      m_Calls:
-      - m_Target: {fileID: 2131322997}
-        m_TargetAssemblyTypeName: HealthSlider, Assembly-CSharp
-        m_MethodName: StartChangeCoroutine
-        m_Mode: 1
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
+      m_Calls: []
 --- !u!114 &750627139
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -646,7 +633,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 21350dd9aad51d5449c70f2084a6991d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _health: {fileID: 0}
 --- !u!136 &750627140
 CapsuleCollider:
   m_ObjectHideFlags: 0
