@@ -12,14 +12,12 @@ public class Menu : MonoBehaviour
 
     public void ClosePanel(GameObject panel)
     {
-
         panel.SetActive(false);
         Time.timeScale = 1;
     }
 
     public void Exit()
     {
-        Debug.Log("sad");
         Application.Quit();
     }
 }
