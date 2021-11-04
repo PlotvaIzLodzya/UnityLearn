@@ -2,9 +2,16 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+[RequireComponent(typeof(Animator))]
 public abstract class State : MonoBehaviour
 {
     [SerializeField] private List<Transition> _transitions;
+    protected Animator _animator;
+
+    private void OnEnable()
+    {
+        _animator = GetComponent<Animator>();
+    }
 
     protected Player Target { get; set; }
 

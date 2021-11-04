@@ -2,19 +2,17 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-[RequireComponent(typeof(Animator),typeof(Enemy))]
+[RequireComponent(typeof(Enemy))]
 public class AttackState : State
 {
     [SerializeField] private float _delay;
 
     private int _damage;
-    private float _lastAttackTime;
-    private Animator _animator;
+    private float _lastAttackTime =0;
 
     private void Start()
     {
         _damage = GetComponent<Enemy>().Damage;
-        _animator = GetComponent<Animator>();
     }
 
     private void Update()
@@ -30,7 +28,7 @@ public class AttackState : State
 
     private void Attack(Player target)
     {
-        _animator.Play("Attack");
+        _animator.Play(AnimatorEnemyController.States.Attack);
 
         if(target != null)
             target.ApplyDamage(_damage);
