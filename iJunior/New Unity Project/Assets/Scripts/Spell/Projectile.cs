@@ -24,7 +24,7 @@ public class Projectile : MonoBehaviour
     {
         if(collision.gameObject.TryGetComponent(out Enemy enemy))
         {
-            enemy.ApplyDamage(_damage);
+            enemy.TakeDamage(_damage);
         }
 
         if(!collision.gameObject.TryGetComponent(out Player player) && !_isPenetrative)

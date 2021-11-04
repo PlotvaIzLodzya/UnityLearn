@@ -17,7 +17,7 @@ public class Explosion : Spell
         {
             if (collider.gameObject.TryGetComponent<Enemy>(out Enemy enemy))
             {
-                enemy.ApplyDamage(_damage);
+                enemy.TakeDamage(_damage);
                 Vector2 awayVector = enemy.transform.position - castPoint.position;
 
                 enemy.AddForce(awayVector.normalized, pushForce);

@@ -28,7 +28,7 @@ public class Enemy : MonoBehaviour
         _target = target;
     }
 
-    public void ApplyDamage(int damage)
+    public void TakeDamage(int damage)
     {
         _currentHealth -= damage;
 
