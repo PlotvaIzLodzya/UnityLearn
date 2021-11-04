@@ -10,7 +10,6 @@ public class Enemy : MonoBehaviour
 
     private int _currentHealth;
     private Player _target;
-    private Rigidbody2D _rigidbody2D;
 
     public int Damage => _damage;
     public Player Target => _target;
@@ -19,7 +18,6 @@ public class Enemy : MonoBehaviour
 
     private void Start()
     {
-        _rigidbody2D = GetComponent<Rigidbody2D>();
         _currentHealth = _maxHealth;
     }
 
@@ -34,11 +32,6 @@ public class Enemy : MonoBehaviour
 
         if (_currentHealth <= 0)
             Die();
-    }
-
-    public void AddForce(Vector3 direction, float force)
-    {
-        _rigidbody2D.AddForce(direction * force);
     }
 
     private void Die()
