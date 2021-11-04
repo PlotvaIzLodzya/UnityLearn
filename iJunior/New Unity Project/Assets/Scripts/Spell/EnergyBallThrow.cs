@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class ThrowEnergyBall : Spell
+public class EnergyBallThrow : Spell
 {
     public override void Cast(Transform castPoint)
     {

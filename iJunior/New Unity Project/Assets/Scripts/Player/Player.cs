@@ -3,26 +3,22 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Events;
 
-[RequireComponent(typeof(Rigidbody2D),typeof(Animator))]
+[RequireComponent(typeof(Rigidbody2D))]
 public class Player : MonoBehaviour
 {
     [SerializeField] private List<Spell> _spells;
     [SerializeField] private float _speed;
     [SerializeField] private float _jumpForce;
     [SerializeField] private int _maxHealth;
-    [SerializeField] private int _currentHealth;
     [SerializeField] private Transform _castPoint;  
-    [SerializeField] private int _curentSpellIndex = 0;
 
+    private int _curentSpellIndex = 0;
+    private int _currentHealth;
     private bool _isGrounded;
     private Spell _currentSpell;
-    private Animator _animator;
+    private Rigidbody2D _rigidbody;
 
-    public bool IsGrounded => _isGrounded;
     public float Speed => _speed;
-    public float JumpForce => _jumpForce;
-    public Transform CastPoint => _castPoint;
-    public Spell CurrentSpell => _currentSpell;
     public List<Spell> Spells => _spells;
 
     public event UnityAction<int, int> HealthChanged;
@@ -30,10 +26,10 @@ public class Player : MonoBehaviour
 
     private void Start()
     {
-        _animator = GetComponent<Animator>();
         _currentHealth = _maxHealth;
         ChangeSpell(_spells[_curentSpellIndex]);
         HealthChanged?.Invoke(_currentHealth, _maxHealth);
+        _rigidbody = GetComponent<Rigidbody2D>();
     }
 
     public void CastSpell()
@@ -60,7 +56,6 @@ public class Player : MonoBehaviour
 
         ChangeSpell(_spells[_curentSpellIndex]);
     }
-
 
     private void OnCollisionEnter2D(Collision2D collision)
     {
@@ -92,15 +87,22 @@ public class Player : MonoBehaviour
         HealthChanged?.Invoke(_currentHealth, _maxHealth);
     }
 
-    public void Die()
-    {
-        _animator.Play("Death");
-        this.enabled = false;
-        Died?.Invoke();
-    }
-
     public void ChangeSpell(Spell spell)
     {
         _currentSpell = spell;
+    }
+
+    public void Jump()
+    {
+        if (_isGrounded)
+        {
+            _isGrounded = false;
+            _rigidbody.velocity = new Vector2(0, _jumpForce);
+        }
+    }
+
+    private void Die()
+    {
+        Died?.Invoke();
     }
 }

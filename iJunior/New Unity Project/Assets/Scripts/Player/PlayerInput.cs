@@ -1,54 +1,44 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Events;
 
-[RequireComponent(typeof(PlayerController),typeof(Player))]
 public class PlayerInput : MonoBehaviour
 {
-    private Player _player;
-    private PlayerController _playerMover;
+    public event UnityAction CastSpellPressed;
 
-    private void OnEnable()
-    {
-        _playerMover = GetComponent<PlayerController>();
-        _player = GetComponent<Player>();
-        _player.Died += Disable;
-    }
-
-    private void OnDisable()
-    {
-        _player.Died -= Disable;
-    }
+    public event UnityAction<KeyCode> KeyboardButtonPressed;
 
     private void Update()
     {
         if (Input.GetKey(KeyCode.D))
         {
-            _playerMover.LookRight();
-            _playerMover.Move(_player.Speed);
+            KeyboardButtonPressed?.Invoke(KeyCode.D);
         }
 
         if (Input.GetKey(KeyCode.A))
         {
-             _playerMover.LookLeft();
-            _playerMover.Move(_player.Speed);
+            KeyboardButtonPressed?.Invoke(KeyCode.A);
         }
 
         if (Input.GetKeyDown(KeyCode.Space))
-            _playerMover.Jump(_player);
+        {
+            KeyboardButtonPressed?.Invoke(KeyCode.Space);
+        }
 
         if (Input.GetMouseButtonDown(0))
-            _playerMover.CastSpell(_player);
+        {
+            CastSpellPressed?.Invoke();
+        }
 
         if (Input.GetKeyDown(KeyCode.E))
-            _playerMover.NextSpell(_player);
+        {
+            KeyboardButtonPressed?.Invoke(KeyCode.E);
+        }
 
         if (Input.GetKeyDown(KeyCode.Q))
-            _playerMover.PreviousSpell(_player);
-    }
-
-    private void Disable()
-    {
-        this.enabled = false;
+        {
+            KeyboardButtonPressed?.Invoke(KeyCode.Q);
+        }
     }
 }

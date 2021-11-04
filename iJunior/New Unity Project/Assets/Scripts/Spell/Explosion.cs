@@ -20,7 +20,7 @@ public class Explosion : Spell
                 enemy.ApplyDamage(_damage);
                 Vector2 awayVector = enemy.transform.position - castPoint.position;
 
-                enemy.GetComponent<Rigidbody2D>().AddForce(awayVector.normalized * pushForce);
+                enemy.AddForce(awayVector.normalized, pushForce);
             }
         }
     }
