@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 
 [RequireComponent(typeof(PlayerInput), typeof(Player))]
-public class PlayerMover : MonoBehaviour
+public class PlayerController : MonoBehaviour
 {
     private PlayerInput _playerInput;
     private Player _player;
