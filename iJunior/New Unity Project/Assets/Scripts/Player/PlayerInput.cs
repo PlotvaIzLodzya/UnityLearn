@@ -6,7 +6,6 @@ using UnityEngine.Events;
 public class PlayerInput : MonoBehaviour
 {
     public event UnityAction CastSpellPressed;
-
     public event UnityAction<KeyCode> KeyboardButtonPressed;
 
     private void Update()
