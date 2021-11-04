@@ -3,7 +3,6 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Events;
 
-[RequireComponent(typeof(SpriteRenderer))]
 public class Enemy : MonoBehaviour
 {
     [SerializeField] private int _maxHealth;

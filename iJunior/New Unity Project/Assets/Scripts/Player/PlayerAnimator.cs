@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 
 [RequireComponent(typeof(Animator), typeof(Player))]
-public class AnimatorPlayerController : MonoBehaviour
+public class PlayerAnimator : MonoBehaviour
 {
     private Player _player;
     
@@ -27,6 +27,6 @@ public class AnimatorPlayerController : MonoBehaviour
 
     public void PlayDeathAnimation()
     {
-        _animator.Play("Death");
+        _animator.Play(AnimatorPlayerController.States.Death);
     }
 }
