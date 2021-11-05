@@ -20,7 +20,8 @@ GameObject:
   - component: {fileID: 207617816}
   - component: {fileID: 207617818}
   - component: {fileID: 5921383174882798634}
-  - component: {fileID: -5450073272453765304}
+  - component: {fileID: 7130769017575970122}
+  - component: {fileID: 1626578744678086065}
   m_Layer: 6
   m_Name: MiddleEnemy
   m_TagString: Untagged
@@ -256,7 +257,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 544ef79c79f250d4d97ef52678a646a9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
---- !u!114 &-5450073272453765304
+--- !u!114 &7130769017575970122
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -268,3 +269,16 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: fd8d9181c2ee0b3418b660417edba226, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!114 &1626578744678086065
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3735085877182821542}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 07583f5591c55fc41bf02856e6083638, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _maxHealth: 100

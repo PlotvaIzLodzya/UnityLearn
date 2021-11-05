@@ -20,7 +20,8 @@ GameObject:
   - component: {fileID: 207617816}
   - component: {fileID: 207617818}
   - component: {fileID: 7753907139932620191}
-  - component: {fileID: 341944349900803013}
+  - component: {fileID: 120006307842089875}
+  - component: {fileID: -2900431380250063038}
   m_Layer: 6
   m_Name: BigEnemy
   m_TagString: Untagged
@@ -256,7 +257,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 544ef79c79f250d4d97ef52678a646a9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
---- !u!114 &341944349900803013
+--- !u!114 &120006307842089875
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -268,3 +269,16 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: fd8d9181c2ee0b3418b660417edba226, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!114 &-2900431380250063038
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3735085877182821542}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 07583f5591c55fc41bf02856e6083638, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _maxHealth: 250
