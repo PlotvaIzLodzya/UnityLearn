@@ -31,6 +31,9 @@ public class AttackState : State
         _animator.Play(AnimatorEnemyController.States.Attack);
 
         if(target != null)
-            target.ApplyDamage(_damage);
+        {
+            if (target.TryGetComponent(out Damagable damagable))
+                damagable.TakeDamage(_damage);
+        }
     }
 }

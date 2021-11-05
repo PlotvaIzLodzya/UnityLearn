@@ -100,7 +100,7 @@ MonoBehaviour:
   _speed: 10
   _lifeTime: 3
   _isPenetrative: 0
-  _damage: 50
+  _damage: 0
 --- !u!61 &-9133695851020137625
 BoxCollider2D:
   m_ObjectHideFlags: 0

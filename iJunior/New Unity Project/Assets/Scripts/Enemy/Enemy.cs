@@ -3,35 +3,26 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Events;
 
+[RequireComponent(typeof(Health))]
 public class Enemy : MonoBehaviour
 {
-    [SerializeField] private int _maxHealth;
     [SerializeField] private int _damage;
 
-    private int _currentHealth;
-    private Player _target;
+    private Health _health;
 
     public int Damage => _damage;
-    public Player Target => _target;
 
     public event UnityAction<Enemy> Dying;
 
-    private void Start()
+    private void OnEnable()
     {
-        _currentHealth = _maxHealth;
+        _health = GetComponent<Health>();
+        _health.HealthRanOut += Die;
     }
 
-    public void Init(Player target)
+    private void OnDisable()
     {
-        _target = target;
-    }
-
-    public void TakeDamage(int damage)
-    {
-        _currentHealth -= damage;
-
-        if (_currentHealth <= 0)
-            Die();
+        _health.HealthRanOut -= Die;
     }
 
     private void Die()

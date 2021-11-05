@@ -49,4 +49,3 @@ MonoBehaviour:
   _icon: {fileID: 21300000, guid: 1760cbe9cac6a0d4483c3e3ddaf9bde6, type: 3}
   _damagePerUpgrade: 5
   _damage: 40
-  _initialDamage: 40

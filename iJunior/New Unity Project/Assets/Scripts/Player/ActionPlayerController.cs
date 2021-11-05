@@ -2,15 +2,17 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-[RequireComponent(typeof(PlayerInput), typeof(Player))]
-public class PlayerController : MonoBehaviour
+[RequireComponent(typeof(PlayerInput), typeof(Player), typeof(SpellBook))]
+public class ActionPlayerController : MonoBehaviour
 {
     private PlayerInput _playerInput;
     private Player _player;
+    private SpellBook _playerSpellBook;
 
     private void OnEnable()
     {
         _player = GetComponent<Player>();
+        _playerSpellBook = GetComponent<SpellBook>();
         _playerInput = GetComponent<PlayerInput>();
         _player.Died += OnPlayerDied;
         _playerInput.KeyboardButtonPressed += ControllPlayer;
@@ -40,10 +42,10 @@ public class PlayerController : MonoBehaviour
                 _player.Jump();
                 break;
             case KeyCode.E:
-                _player.NextSpell();
+                _playerSpellBook.NextSpell();
                 break;
             case KeyCode.Q:
-                _player.PreviousSpell();
+                _playerSpellBook.PreviousSpell();
                 break;
             default:
                 break;
@@ -57,7 +59,7 @@ public class PlayerController : MonoBehaviour
 
     public void CastSpell()
     {
-        _player.CastSpell();
+        _playerSpellBook.CurrentSpell.Cast(_player.CastPoint);
     }
 
     public void LookRight()

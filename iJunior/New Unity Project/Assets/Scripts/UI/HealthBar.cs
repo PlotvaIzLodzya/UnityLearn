@@ -6,13 +6,16 @@ public class HealthBar : Bar
 {
     [SerializeField] private Player _player;
 
+    private Health _playerHealth;
+
     private void OnEnable()
     {
-        _player.HealthChanged += OnValueChanged;
+        _playerHealth = _player.GetComponent<Health>();
+        _playerHealth.HealthChanged += OnValueChanged;
     }
 
     private void OnDisable()
     {
-        _player.HealthChanged -= OnValueChanged;
+        _playerHealth.HealthChanged -= OnValueChanged;
     }
 }

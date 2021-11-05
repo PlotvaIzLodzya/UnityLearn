@@ -51,7 +51,10 @@ public class Spawner : MonoBehaviour
         int templateIndex = Random.Range(0, _waves[_currentWaveNumber].Templates.Length);
 
         Enemy enemy = Instantiate(_currentWave.Templates[templateIndex], _spawnPoints[spawnPointIndex].position, _spawnPoints[spawnPointIndex].rotation).GetComponent<Enemy>();
-        enemy.Init(_player);
+
+        if(enemy.TryGetComponent<EnemyStateMachine>(out EnemyStateMachine enemyStateMachine))
+            enemyStateMachine.Init(_player);
+
         enemy.Dying += OnEnemyDied;
     }
 
@@ -94,7 +97,7 @@ public class Spawner : MonoBehaviour
 [System.Serializable]
 public class Wave
 {
-    public GameObject[] Templates;
+    public Enemy[] Templates;
     public float Delay;
     public int Count;
 }

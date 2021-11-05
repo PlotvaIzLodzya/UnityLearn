@@ -15,13 +15,13 @@ public class Explosion : Spell
 
         foreach (var collider in colliders)
         {
-            if (collider.gameObject.TryGetComponent<Enemy>(out Enemy enemy))
+            if (collider.gameObject.TryGetComponent(out Damagable damagable) && collider.gameObject.TryGetComponent(out Player player) == false)
             {
-                enemy.TakeDamage(_damage);
+                damagable.TakeDamage(_damage);
                 
-                if(enemy.gameObject.TryGetComponent<Pushable>(out Pushable pushable))
+                if(damagable.gameObject.TryGetComponent<Pushable>(out Pushable pushable))
                 {
-                    Vector2 awayVector = enemy.transform.position - castPoint.position;
+                    Vector2 awayVector = damagable.transform.position - castPoint.position;
                     pushable.Push(awayVector.normalized, pushForce);
                 }
             }

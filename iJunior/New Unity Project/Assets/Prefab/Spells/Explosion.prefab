@@ -47,7 +47,6 @@ MonoBehaviour:
   Projectile: {fileID: 8693180770209277381, guid: 4371810d3d0c0804c9336b83d921eb0d, type: 3}
   _icon: {fileID: 21300000, guid: ecb9dc87f10a36843af05a3c7b7bcc7a, type: 3}
   _damagePerUpgrade: 5
-  _damage: 10
-  _initialDamage: 10
+  _damage: 0
   _radius: 2
   pushForce: 450

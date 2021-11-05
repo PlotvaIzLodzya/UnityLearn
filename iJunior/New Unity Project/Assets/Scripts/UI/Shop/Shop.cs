@@ -5,7 +5,7 @@ using UnityEngine.UI;
 
 public class Shop : MonoBehaviour
 {
-    [SerializeField] private Player _player;
+    [SerializeField] private SpellBook _playerSpellBook;
     [SerializeField] private SpellView _template;
     [SerializeField] private GameObject _itemContainer;
     [SerializeField] private Spawner _spawner;
@@ -14,9 +14,9 @@ public class Shop : MonoBehaviour
 
     private void Start()
     {
-        for (int i = 0; i < _player.Spells.Count; i++)
+        for (int i = 0; i < _playerSpellBook.Spells.Count; i++)
         {
-            AddItem(_player.Spells[i]);
+            AddItem(_playerSpellBook.Spells[i]);
         }
     }
 
@@ -35,7 +35,7 @@ public class Shop : MonoBehaviour
     private void OnUpgradeButtonClick(Spell spell)
     {
         gameObject.SetActive(false);
-        spell.IncreaseDamage(spell.DamagePerUpgrade);
+        spell.IncreaseDamage();
         _spawner.NextWave();
     } 
 }

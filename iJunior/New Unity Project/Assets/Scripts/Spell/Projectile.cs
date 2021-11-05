@@ -8,7 +8,7 @@ public class Projectile : MonoBehaviour
     [SerializeField] private float _lifeTime;
     [SerializeField] private bool _isPenetrative;
 
-    [SerializeField] private int _damage;
+    private int _damage;
 
     private void Start()
     {
@@ -22,13 +22,13 @@ public class Projectile : MonoBehaviour
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
-        if(collision.gameObject.TryGetComponent(out Enemy enemy))
+        if(collision.gameObject.TryGetComponent(out Damagable damagable) && collision.gameObject.TryGetComponent(out Player player) == false)
         {
-            enemy.TakeDamage(_damage);
-        }
+            damagable.TakeDamage(_damage);
 
-        if(!collision.gameObject.TryGetComponent(out Player player) && !_isPenetrative)
-            Destroy(gameObject);
+            if(!_isPenetrative)
+                Destroy(gameObject);
+        }
     }
 
     private IEnumerator TimerUntilDestroy()
@@ -37,8 +37,8 @@ public class Projectile : MonoBehaviour
         Destroy(gameObject);
     }
 
-    public void IncreaseDamage(int additionalDamage)
+    public void SetDamage(int damage)
     {
-        _damage += additionalDamage;
+        _damage = damage;
     }
 }

@@ -11276,7 +11276,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6495af83d57950c48bf9307a0ca57b13, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _player: {fileID: 1218450909}
+  _playerSpellBook: {fileID: 1218450914}
   _template: {fileID: 6696307511930278569, guid: fbb00960127a40247bfeb7202f1b9abf, type: 3}
   _itemContainer: {fileID: 1460697419}
   _spawner: {fileID: 1489992502}
@@ -11847,6 +11847,10 @@ GameObject:
   - component: {fileID: 1218450907}
   - component: {fileID: 1218450910}
   - component: {fileID: 1218450911}
+  - component: {fileID: 1218450912}
+  - component: {fileID: 1218450913}
+  - component: {fileID: 1218450914}
+  - component: {fileID: 1218450915}
   m_Layer: 7
   m_Name: Player
   m_TagString: Untagged
@@ -12003,13 +12007,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7abebce05f27218458d573ad3803ce6b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _spells:
-  - {fileID: 2030831928223597666, guid: 1f2a1111ae86a144b853a735414b2131, type: 3}
-  - {fileID: 1632660129351414185, guid: a3551a199d3ac03419440e0d388d821c, type: 3}
-  - {fileID: 2030831928223597666, guid: a46aef16c9187fe4db6448dc2f49b40a, type: 3}
   _speed: 8
   _jumpForce: 7
-  _maxHealth: 100
   _castPoint: {fileID: 806784738}
 --- !u!95 &1218450910
 Animator:
@@ -12040,6 +12039,59 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: b1af5def3e2344641968e2972ebfb753, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &1218450912
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1218450902}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 07583f5591c55fc41bf02856e6083638, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _maxHealth: 100
+--- !u!114 &1218450913
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1218450902}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fd8d9181c2ee0b3418b660417edba226, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &1218450914
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1218450902}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3140ffce5ca4b8045a610fab62c194ac, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _spells:
+  - {fileID: 2030831928223597666, guid: 1f2a1111ae86a144b853a735414b2131, type: 3}
+  - {fileID: 1632660129351414185, guid: a3551a199d3ac03419440e0d388d821c, type: 3}
+  - {fileID: 2030831928223597666, guid: a46aef16c9187fe4db6448dc2f49b40a, type: 3}
+--- !u!114 &1218450915
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1218450902}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 34f157d6512922e4ebb808f70c1ed17e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
 --- !u!1 &1229910147
@@ -13357,15 +13409,19 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _waves:
   - Templates:
-    - {fileID: 3735085877182821542, guid: a34add55c8679a249b4bf1cbf5b1a98a, type: 3}
-    - {fileID: 3735085877182821542, guid: acf0f2e8eafe83849a2b4c32ef489aef, type: 3}
+    - {fileID: 3735085877182821537, guid: a34add55c8679a249b4bf1cbf5b1a98a, type: 3}
+    Delay: 0.3
+    Count: 40
+  - Templates:
+    - {fileID: 3735085877182821537, guid: acf0f2e8eafe83849a2b4c32ef489aef, type: 3}
     Delay: 0.5
     Count: 20
   - Templates:
-    - {fileID: 3735085877182821542, guid: 6e70cb68567b2fb4b97ad8894e048025, type: 3}
-    - {fileID: 3735085877182821542, guid: acf0f2e8eafe83849a2b4c32ef489aef, type: 3}
+    - {fileID: 3735085877182821537, guid: a34add55c8679a249b4bf1cbf5b1a98a, type: 3}
+    - {fileID: 3735085877182821537, guid: acf0f2e8eafe83849a2b4c32ef489aef, type: 3}
+    - {fileID: 3735085877182821537, guid: 6e70cb68567b2fb4b97ad8894e048025, type: 3}
     Delay: 0.5
-    Count: 5
+    Count: 20
   _spawnPoints:
   - {fileID: 239490604}
   - {fileID: 1523407826}
@@ -14690,8 +14746,8 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 1218450909}
-        m_TargetAssemblyTypeName: Player, Assembly-CSharp
+      - m_Target: {fileID: 1218450915}
+        m_TargetAssemblyTypeName: Healable, Assembly-CSharp
         m_MethodName: Heal
         m_Mode: 3
         m_Arguments:

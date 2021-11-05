@@ -6,6 +6,7 @@ public class EnergyBallThrow : Spell
 {
     public override void Cast(Transform castPoint)
     {
-        Instantiate(Projectile, castPoint.position, castPoint.rotation);
+        var projectile = Instantiate(Projectile, castPoint.position, castPoint.rotation);
+        projectile.SetDamage(_damage);
     }
 }

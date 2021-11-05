@@ -20,6 +20,7 @@ GameObject:
   - component: {fileID: 207617816}
   - component: {fileID: 207617818}
   - component: {fileID: 7753907139932620191}
+  - component: {fileID: 341944349900803013}
   m_Layer: 6
   m_Name: BigEnemy
   m_TagString: Untagged
@@ -104,7 +105,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6749ccd0aab7da6488a40fc61fdb7621, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _maxHealth: 250
   _damage: 10
 --- !u!50 &3735085877182821549
 Rigidbody2D:
@@ -254,5 +254,17 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 544ef79c79f250d4d97ef52678a646a9, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &341944349900803013
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3735085877182821542}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fd8d9181c2ee0b3418b660417edba226, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 

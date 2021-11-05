@@ -12,12 +12,11 @@ public abstract class Spell : MonoBehaviour
 
     public string Label => _label;
     public Sprite Icon => _icon;
-    public int DamagePerUpgrade => _damagePerUpgrade;
 
     public abstract void Cast(Transform castPoint);
 
-    public void IncreaseDamage(int damage)
+    public void IncreaseDamage()
     {
-        Projectile.IncreaseDamage(damage);
+        _damage += _damagePerUpgrade;
     }
 }
