@@ -58,7 +58,9 @@ public class Spawner : MonoBehaviour
     public void SpawnBall(Vector3 spawnPoint)
     {
         Ball ball = Instantiate(_ball, spawnPoint, Quaternion.identity);
-        ball.Init(_player, _bottomBorder, _additionalSpeed);
+        ball.Init(_player);
+        ball.GetComponent<BallMover>().IncreaseSpeed(_increaseSpeedPerSpawn);
+        ball.GetComponent<Punisher>().Init(_player, _bottomBorder);
         _ballSpawned?.Invoke();
     }
 }
