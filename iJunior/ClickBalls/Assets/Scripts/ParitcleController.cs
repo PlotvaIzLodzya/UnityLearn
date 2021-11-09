@@ -29,9 +29,9 @@ public class ParitcleController : MonoBehaviour
         _ball.Poped -= Play;
     }
 
-    private void Play(int reward)
+    private void Play(int particleAmount)
     {
         _particles.transform.parent = null;
-        _particles.Play();
+        _particles.Emit(particleAmount);
     }
 }
