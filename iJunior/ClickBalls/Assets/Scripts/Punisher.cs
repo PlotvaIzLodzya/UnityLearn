@@ -10,6 +10,13 @@ public class Punisher : MonoBehaviour
 
     private float _bottomBorder;
 
+    private void Start()
+    {
+        _bottomBorder = Camera.main.ViewportToWorldPoint(new Vector3(0, 0, 0)).y;
+        float radius = GetComponent<Renderer>().bounds.extents.magnitude;
+        _bottomBorder -= radius;
+    }
+
     private void Update()
     {
         if (transform.position.y < _bottomBorder)
@@ -19,10 +26,8 @@ public class Punisher : MonoBehaviour
         }
     }
 
-    public void Init(Player player, float bottomBorder)
+    public void Init(Player player)
     {
         _player = player;
-        float radius = GetComponent<Renderer>().bounds.extents.magnitude;
-        _bottomBorder = bottomBorder - radius;
     }
 }

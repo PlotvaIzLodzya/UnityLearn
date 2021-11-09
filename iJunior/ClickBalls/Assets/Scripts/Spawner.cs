@@ -17,7 +17,6 @@ public class Spawner : MonoBehaviour
     private float _leftBorder;
     private float _rightBorder;
     private float _upBorder;
-    private float _bottomBorder;
     private float _distanceFromCamera = 20;
 
     private event UnityAction _ballSpawned;
@@ -27,7 +26,6 @@ public class Spawner : MonoBehaviour
         _leftBorder = Camera.main.ViewportToWorldPoint(new Vector3(0.2f, 0, 0)).x;
         _rightBorder = Camera.main.ViewportToWorldPoint(new Vector3(0.98f, 0, 0)).x;
         _upBorder = Camera.main.ViewportToWorldPoint(new Vector3(0, 1, 0)).y;
-        _bottomBorder = Camera.main.ViewportToWorldPoint(new Vector3(0, 0, 0)).y;
     }
 
     private void OnEnable()
@@ -59,8 +57,8 @@ public class Spawner : MonoBehaviour
     {
         Ball ball = Instantiate(_ball, spawnPoint, Quaternion.identity);
         ball.Init(_player);
-        ball.GetComponent<BallMover>().IncreaseSpeed(_increaseSpeedPerSpawn);
-        ball.GetComponent<Punisher>().Init(_player, _bottomBorder);
+        ball.GetComponent<BallMover>().IncreaseSpeed(_additionalSpeed);
+        ball.GetComponent<Punisher>().Init(_player);
         _ballSpawned?.Invoke();
     }
 }
